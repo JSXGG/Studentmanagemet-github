@@ -5,7 +5,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 const App = resolve => require(['../App'], resolve)
-const proRootDic = '/healthhandbook';
+const proRootDic = '/studentmanagemet';
 const routes = [{
     path: proRootDic, component: App, meta: {requiresAuth: true}
 },

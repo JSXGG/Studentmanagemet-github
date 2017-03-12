@@ -1,19 +1,16 @@
 <template>
     <div>
-        <mt-header fixed title="学生管理手册">
-            <router-link to="/" slot="left">
-                <mt-button icon="back">back</mt-button>
-            </router-link>
-            <mt-button icon="more" slot="right"></mt-button>
-        </mt-header>
+        <!--<header></header>-->
+        <sdheader></sdheader>
         <div class="app-container">
             <home></home>
         </div>
+        <sdfoot></sdfoot>
     </div>
 </template>
 <style lang="less" rel="stylesheet/less">
     .app-container{
-        margin-top: 40px;
+        margin-top: 55px;
         position: relative;
         display: flex;
         flex-direction: column;
@@ -22,12 +19,16 @@
 </style>
 <script>
     import home from './pages/home.vue';
+    import sdheader from './components/Header/SDheader.vue'
+    import sdfoot from './components/Foot/SDfoot.vue'
     export default {
         data () {
             return {}
         },
         components: {
-            home
+            home,
+            sdheader,
+            sdfoot
         }
     }
 </script>
