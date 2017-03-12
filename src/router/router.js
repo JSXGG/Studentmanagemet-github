@@ -7,7 +7,8 @@ Vue.use(VueRouter)
 const App = resolve => require(['../App'], resolve)
 const proRootDic = '/healthhandbook';
 const routes = [{
-    path: proRootDic, component: App, meta: {requiresAuth: true}},
+    path: proRootDic, component: App, meta: {requiresAuth: true}
+},
     {path: '*', redirect: proRootDic}];
 const router = new VueRouter({
     mode: 'history',

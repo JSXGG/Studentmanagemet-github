@@ -6,12 +6,30 @@
             </router-link>
             <mt-button icon="more" slot="right"></mt-button>
         </mt-header>
-        <mt-index-list>
-            <mt-cell title="低年级班"></mt-cell>
-        </mt-index-list>
+        <div class="app-container">
+            <home></home>
+        </div>
     </div>
 </template>
+<style lang="less" rel="stylesheet/less">
+    .app-container{
+        margin-top: 40px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+</style>
 <script>
+    import home from './pages/home.vue';
+    export default {
+        data () {
+            return {}
+        },
+        components: {
+            home
+        }
+    }
 </script>
 
 
