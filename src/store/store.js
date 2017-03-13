@@ -9,6 +9,6 @@ const store = new Vuex.Store({
     modules: {
         comm
     },
-    strict: process.env.NODE_ENV !== 'production', //是否开启严格模式
+    strict: process.env.NODE_ENV !== 'production', //锟角凤拷锟斤拷锟较革拷模式
 });
 export default store

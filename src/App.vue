@@ -1,10 +1,10 @@
 <template>
     <div>
-        <sdheader></sdheader>
+        <sdheader v-if="commConf.isHeader"></sdheader>
         <div class="app-container">
-            <home></home>
+            <router-view></router-view>
         </div>
-        <sdfoot></sdfoot>
+        <sdfoot v-if="commConf.isFooter"></sdfoot>
     </div>
 </template>
 <style lang="less" rel="stylesheet/less">
@@ -28,7 +28,6 @@
         //计算属性，获取。
         computed: {
             commConf: function () {
-                console.log(this.$store.getters.commConf)
                 return this.$store.getters.commConf
             }
         },

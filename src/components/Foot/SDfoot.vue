@@ -1,11 +1,11 @@
 <template>
     <div>
         <mt-tabbar class="mt-tabbar" fixed v-model="selected">
-            <mt-tab-item id="1">
+            <mt-tab-item id="Home">
                 <img slot="icon" src="../../assets/home.png">
                 主页
             </mt-tab-item>
-            <mt-tab-item id="2">
+            <mt-tab-item id="Setupthe">
                 <img slot="icon" src="../../assets/home.png">
                 设置
             </mt-tab-item>
@@ -21,7 +21,15 @@
     export default {
         data () {
             return {
-                selected: false
+                selected: 'Home'
+            }
+        },
+        methods: {
+
+        },
+        watch: {
+            selected: function (id) {
+                this.$router.push({ name: id })
             }
         }
     }
