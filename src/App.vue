@@ -1,6 +1,5 @@
 <template>
     <div>
-        <!--<header></header>-->
         <sdheader></sdheader>
         <div class="app-container">
             <home></home>
@@ -9,7 +8,7 @@
     </div>
 </template>
 <style lang="less" rel="stylesheet/less">
-    .app-container{
+    .app-container {
         margin-top: 55px;
         position: relative;
         display: flex;
@@ -25,6 +24,13 @@
     export default {
         data () {
             return {}
+        },
+        //计算属性，获取。
+        computed: {
+            commConf: function () {
+                console.log(this.$store.getters.commConf)
+                return this.$store.getters.commConf
+            }
         },
         components: {
             home,
