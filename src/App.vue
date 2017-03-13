@@ -16,9 +16,10 @@
         flex-direction: column;
         min-height: 100vh;
     }
+
 </style>
 <script>
-    import home from './pages/home.vue';
+    import home from './pages/Home.vue';
     import sdheader from './components/Header/SDheader.vue'
     import sdfoot from './components/Foot/SDfoot.vue'
     export default {
