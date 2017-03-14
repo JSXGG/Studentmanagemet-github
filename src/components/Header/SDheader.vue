@@ -1,15 +1,21 @@
 <template>
-    <div>
-        <mt-header class="mt-header" fixed :title=commConf.title>
-        </mt-header>
+    <div class="mt-header">
+        <XHeader :left-options="{showBack: commConf.isBack}">{{commConf.title}}</XHeader>
     </div>
 </template>
 <style lang="less" rel="stylesheet/less">
     .mt-header{
+        position: fixed;
+        width: 100%;
+        left: 0px;
         height: 55px;
+        top: 0px;
+        z-index: 10000;
     }
 </style>
 <script>
+    import { XHeader } from 'vux'
+
     export default {
         data () {
             return {}
@@ -19,6 +25,9 @@
             commConf: function () {
                 return this.$store.getters.commConf
             }
+        },
+        components: {
+            XHeader
         }
     }
 </script>
