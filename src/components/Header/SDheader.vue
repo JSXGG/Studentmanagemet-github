@@ -8,7 +8,7 @@
         position: fixed;
         width: 100%;
         left: 0px;
-        height: 55px;
+        height: 46px;
         top: 0px;
         z-index: 10000;
     }

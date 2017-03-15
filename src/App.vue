@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="width: 100%;">
         <sdheader v-if="commConf.isHeader"></sdheader>
         <div class="app-container">
             <router-view></router-view>
@@ -9,11 +9,10 @@
 </template>
 <style lang="less" rel="stylesheet/less">
     .app-container {
-        margin-top: 55px;
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
+        position: absolute;
+        margin-top: 38px;
+        left: 0px;
+        width: 100%;
     }
 
 </style>
