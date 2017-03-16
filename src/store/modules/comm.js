@@ -9,7 +9,8 @@ const state = {
     isBack: false,   //是否显示返回
     title: '',  //显示标题内容
     isHeader: true,  //是否显示头部标题
-    isFooter: false  //是否显示底部
+    isFooter: false,  //是否显示底部
+    tabBarIndex: 0,  //当前tab的选项。
 };
 const actions = {
     commConf({commit}, settings){

@@ -5,17 +5,25 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 const App = resolve => require(['../App'], resolve)
-const Setupthe = resolve => require(['../pages/Setupthe'], resolve)
+const Home = resolve => require(['../pages/mainview/Home'], resolve)
+const Manage = resolve => require(['../pages/mainview/Manage'], resolve)
+const Setupthe = resolve => require(['../pages/mainview/Setupthe'], resolve)
+
+const Studentspage = resolve => require(['../pages/studentspage/Studentspage'], resolve)
+
+
+
 const proRootDic = '/studentmanagemet';
-const Home = resolve => require(['../pages/Home'], resolve)
 /*配置路由目录*/
 const routes = [
     {
         path: proRootDic, component: App, meta: {requiresAuth: true}, redirect: proRootDic + '/home',
         //配置子路由
         children: [
-            {path: 'setupthe', component: Setupthe, meta: {requiresAuth: true},name:'Setupthe'},
             {path: 'home', component: Home, meta: {requiresAuth: true},name:'Home'},
+            {path: 'manage', component: Manage, meta: {requiresAuth: true},name:'Manage'},
+            {path: 'setupthe', component: Setupthe, meta: {requiresAuth: true},name:'Setupthe'},
+            {path: 'studentspage/:id', component: Studentspage,name:'Studentspage'}
         ]
     },
     {path: '*', redirect: proRootDic + '/home'}/*默认路由*/

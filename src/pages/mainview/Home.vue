@@ -1,7 +1,9 @@
 <template>
     <div class="home">
         <group>
-            <cell style="height: 40px" v-for="item in items" :title="item.name" :value="item.value"></cell>
+            <cell style="height: 40px" v-for="item in items" :title="item.name" :value="item.value" @click.native="onClick(item.name)"
+                  is-link>
+            </cell>
         </group>
     </div>
 </template>
@@ -13,17 +15,9 @@
         data () {
             return {
                 items: [
-                    {name: '班级', value: '二年级一班'},
-                    {name: '班级', value: '三年级一班'},
-                    {name: '班级', value: '四年级一班'},
-                    {name: '班级', value: '五年级一班'}
+                    {name: '班级', value: '二年级一班'}
                 ]
             }
-        },
-        beforeRouteEnter (to, from, next) {
-            next(vm => {
-                vm.reloadData();
-            });
         },
         methods: {
             reloadData: function () {
@@ -31,8 +25,12 @@
                     isBack: false,   //是否显示返回
                     title: '主页',  //显示标题内容
                     isHeader: true,  //是否显示头部标题
-                    isFooter: true
+                    isFooter: true,
+                    tabBarIndex:0
                 });
+            },
+            onClick(name){
+                console.log(name);
             }
         },
         components: {

@@ -8,16 +8,17 @@
     </div>
 </template>
 <style lang="less" rel="stylesheet/less">
+    @import '../node_modules/vux/src/styles/reset.less';
+    @import '../node_modules/vux/src/styles/1px.less';
+    @import '../node_modules/vux/src/styles/tap.less';
     .app-container {
         position: absolute;
-        margin-top: 38px;
-        left: 0px;
+        margin-top: 46px;
         width: 100%;
     }
-
 </style>
 <script>
-    import home from './pages/Home.vue';
+    import home from './pages/mainview/Home.vue';
     import sdheader from './components/Header/SDheader.vue'
     import sdfoot from './components/Foot/SDfoot.vue'
     export default {

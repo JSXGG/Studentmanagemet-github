@@ -9,6 +9,6 @@ const store = new Vuex.Store({
     modules: {
         comm
     },
-    strict: process.env.NODE_ENV !== 'production', //�Ƿ����ϸ�ģʽ
+    strict: process.env.NODE_ENV !== 'production',
 });
 export default store
