@@ -8,10 +8,8 @@ const App = resolve => require(['../App'], resolve)
 const Home = resolve => require(['../pages/mainview/Home'], resolve)
 const Manage = resolve => require(['../pages/mainview/Manage'], resolve)
 const Setupthe = resolve => require(['../pages/mainview/Setupthe'], resolve)
-
 const Studentspage = resolve => require(['../pages/studentspage/Studentspage'], resolve)
-
-
+const Studentinfo = resolve => require(['../pages/studentspage/Studentinfo'], resolve)
 
 const proRootDic = '/studentmanagemet';
 /*配置路由目录*/
@@ -23,7 +21,8 @@ const routes = [
             {path: 'home', component: Home, meta: {requiresAuth: true},name:'Home'},
             {path: 'manage', component: Manage, meta: {requiresAuth: true},name:'Manage'},
             {path: 'setupthe', component: Setupthe, meta: {requiresAuth: true},name:'Setupthe'},
-            {path: 'studentspage/:id', component: Studentspage,name:'Studentspage'}
+            {path: 'studentspage/:id', component: Studentspage,name:'Studentspage'},
+            {path: 'Studentinfo/:id', component: Studentinfo,name:'Studentinfo'}
         ]
     },
     {path: '*', redirect: proRootDic + '/home'}/*默认路由*/

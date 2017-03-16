@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <group title="我的班级">
+        <group title="超优教育">
             <cell v-for="item in items" :title="item.name" :inline-desc="item.desc" style="" @click.native="onClick(item.name)"
                   is-link>
                 <img slot="icon" width="40px" height="40px" style="display:block;margin-right:15px;" :src=item.icon>
