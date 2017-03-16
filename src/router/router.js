@@ -8,14 +8,9 @@ const App = resolve => require(['../App'], resolve)
 const Home = resolve => require(['../pages/mainview/Home'], resolve)
 const Manage = resolve => require(['../pages/mainview/Manage'], resolve)
 const Setupthe = resolve => require(['../pages/mainview/Setupthe'], resolve)
-<<<<<<< HEAD
-=======
 const Passwordchange = resolve => require(['../pages/studentspage/Passwordchange'],resolve)
-
->>>>>>> b7f76e0e78e15b32c71f3d72f24fa2168021fa97
 const Studentspage = resolve => require(['../pages/studentspage/Studentspage'], resolve)
 const Studentinfo = resolve => require(['../pages/studentspage/Studentinfo'], resolve)
-
 const proRootDic = '/studentmanagemet';
 /*配置路由目录*/
 const routes = [
