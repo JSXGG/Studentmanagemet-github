@@ -41,6 +41,12 @@
             onClick (name)
             {
                 console.log(name)
+                if (name==='密码重置')
+                {
+                    console.log(11)
+                    this.$router.push({name: 'Passwordchange'});
+
+                }
 
             }
         },
