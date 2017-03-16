@@ -8,6 +8,7 @@ const App = resolve => require(['../App'], resolve)
 const Home = resolve => require(['../pages/mainview/Home'], resolve)
 const Manage = resolve => require(['../pages/mainview/Manage'], resolve)
 const Setupthe = resolve => require(['../pages/mainview/Setupthe'], resolve)
+const Passwordchange = resolve => require(['../pages/studentspage/Passwordchange'],resolve)
 
 const Studentspage = resolve => require(['../pages/studentspage/Studentspage'], resolve)
 
@@ -22,6 +23,7 @@ const routes = [
         children: [
             {path: 'home', component: Home, meta: {requiresAuth: true},name:'Home'},
             {path: 'manage', component: Manage, meta: {requiresAuth: true},name:'Manage'},
+            {path: 'passwordchange', component: Passwordchange, meta: {requiresAuth: true},name:'Passwordchange'},
             {path: 'setupthe', component: Setupthe, meta: {requiresAuth: true},name:'Setupthe'},
             {path: 'studentspage/:id', component: Studentspage,name:'Studentspage'}
         ]
