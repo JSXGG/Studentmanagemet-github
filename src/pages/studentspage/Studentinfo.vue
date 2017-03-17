@@ -22,22 +22,27 @@
                 <div style="margin-left: 10px">{{baseinfo.hobby}}</div>
             </div>
         </div>
-        <div class="block" v-for="item in items">
-            <div class="formteach">
-                {{item.btime}}到{{item.etime}} 第{{item.week}}周<br>{{item.teach}}的短评
-            </div>
-            <h4 class="title">本周总结 （学习&生活）</h4>
-            <p style="padding: 10px">
-                {{item.thisWeekSummary}}
-            </p>
-            <h4 class="title">下周计划</h4>
-            <p style="padding: 10px">
-                {{item.nextWeekSummary}}
+        <div class="pagebody">
+            <div class="block" v-for="item in items">
+                <div class="formteach">
+                    {{item.btime}}到{{item.etime}} 第{{item.week}}周<br>{{item.teach}}的短评
+                </div>
+                <h4 class="title">本周总结 （学习&生活）</h4>
+                <p style="padding: 10px">
+                    {{item.thisWeekSummary}}
+                </p>
+                <h4 class="title">下周计划</h4>
+                <p style="padding: 10px">
+                    {{item.nextWeekSummary}}
 
-            </p>
-            <h4 class="title">问题反思与 改进方案</h4>
-            <p style="padding: 10px">
-                {{item.nextWeekPlan}}
+                </p>
+                <h4 class="title">问题反思与 改进方案</h4>
+                <p style="padding: 10px">
+                    {{item.nextWeekPlan}}
+            </div>
+        </div>
+        <div class="addbtn">
+            <x-button style="filter:alpha(opacity=50)" type="primary" @click.native="clickOntheAddBtn">添加点评</x-button>
         </div>
     </div>
 </template>
@@ -47,17 +52,21 @@
     .studentinfo .header {
         margin: 10px;
         background-color: white;
-        height: 50vw;
+        height: 180px;
         border-radius: 5px;
         box-shadow: 0 1px 1px #d6d6d6;
-        padding: 5px;
+        padding: 10px;
     }
 
     .studentinfo .header .title {
         left: 10px;
-        height: 10vw;
-        line-height: 10vw;
-        font-size: 0.9rem;
+        height: 36px;
+        line-height: 36px;
+        font-size: 1rem;
+    }
+
+    .studentinfo .pagebody {
+        margin-bottom: 150px;
     }
 
     .studentinfo .block {
@@ -76,11 +85,17 @@
         background-color: @theme-color;
         font-size: 1rem;
     }
-
     .studentinfo .block .title {
         margin-left: 5px;
         font-size: 0.9rem;
         color: @stress-color;
+    }
+    .studentinfo .addbtn{
+        position: fixed;
+        opacity: 0.5;
+        width: 35%;
+        bottom: 10px;
+        right: 10px;
     }
 </style>
 <script>
@@ -153,6 +168,9 @@
                     isHeader: true,
                     isFooter: false,
                 });
+            },
+            clickOntheAddBtn(){
+                this.$router.push({name: 'Commentontheinput',params: { id: '1'}});
             }
         },
         components: {

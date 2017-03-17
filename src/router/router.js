@@ -11,6 +11,8 @@ const Setupthe = resolve => require(['../pages/mainview/Setupthe'], resolve)
 const Passwordchange = resolve => require(['../pages/studentspage/Passwordchange'],resolve)
 const Studentspage = resolve => require(['../pages/studentspage/Studentspage'], resolve)
 const Studentinfo = resolve => require(['../pages/studentspage/Studentinfo'], resolve)
+const Commentontheinput = resolve => require(['../pages/studentspage/Commentontheinput'], resolve)
+
 const proRootDic = '/website/studentmanagemet/';
 /*配置路由目录*/
 const routes = [
@@ -23,7 +25,8 @@ const routes = [
             {path: 'passwordchange', component: Passwordchange, meta: {requiresAuth: true},name:'Passwordchange'},
             {path: 'setupthe', component: Setupthe, meta: {requiresAuth: true},name:'Setupthe'},
             {path: 'studentspage/:id', component: Studentspage,meta: {requiresAuth: true},name:'Studentspage'},
-            {path: 'studentinfo/:id', component: Studentinfo,meta: {requiresAuth: true},name:'Studentinfo'}
+            {path: 'studentinfo/:id', component: Studentinfo,meta: {requiresAuth: true},name:'Studentinfo'},
+            {path: 'commentontheinput/:id', component: Commentontheinput,meta: {requiresAuth: true},name:'Commentontheinput'},
         ]
     },
     {path: '*', redirect: proRootDic + 'home'}/*默认路由*/

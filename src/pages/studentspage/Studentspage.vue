@@ -79,9 +79,9 @@
             },
             reloadView(){
                 let obj = [
-                    {name: '黄子华', number: '122', icon: require('../../assets/Student.png')},
-                    {name: '成易迅', number: '13', icon: require('../../assets/Student.png')},
-                    {name: '隍换强', number: '14', icon: require('../../assets/Student.png')}];
+                    {name: '黄子华', number: '', icon: require('../../assets/Student.png')},
+                    {name: '成易迅', number: '', icon: require('../../assets/Student.png')},
+                    {name: '隍换强', number: '', icon: require('../../assets/Student.png')}];
                 this.items = [obj, obj, obj, obj, obj, obj, obj, obj, obj];
             },
             clickOntheAdd(){
