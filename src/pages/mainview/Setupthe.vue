@@ -20,13 +20,15 @@
 
 <style lang="less" rel="stylesheet/less">
     @import '../../theme.less';
+    .setupthe{
+        margin-bottom: 55px;
+    }
     .setupthe .img {
         width: 50px;
         height: 50px;
         border-radius: 25px;
         margin-right:15px;
         border:1px solid @Bordercolor-color
-
     }
     .cellId
     {
