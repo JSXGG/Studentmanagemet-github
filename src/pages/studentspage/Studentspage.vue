@@ -75,9 +75,7 @@
                 this.reloadView();
             },
             clickOntheItem(item){
-                console.log(item);
                 this.$router.push({name: 'Studentinfo',params: { id: item.name}});
-
             },
             reloadView(){
                 let obj = [

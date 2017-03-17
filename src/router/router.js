@@ -11,22 +11,22 @@ const Setupthe = resolve => require(['../pages/mainview/Setupthe'], resolve)
 const Passwordchange = resolve => require(['../pages/studentspage/Passwordchange'],resolve)
 const Studentspage = resolve => require(['../pages/studentspage/Studentspage'], resolve)
 const Studentinfo = resolve => require(['../pages/studentspage/Studentinfo'], resolve)
-const proRootDic = '/studentmanagemet';
+const proRootDic = '/website/studentmanagemet/';
 /*配置路由目录*/
 const routes = [
     {
-        path: proRootDic, component: App, meta: {requiresAuth: true}, redirect: proRootDic + '/home',
+        path: proRootDic, component: App, meta: {requiresAuth: true}, redirect: proRootDic + 'home',
         //配置子路由
         children: [
             {path: 'home', component: Home, meta: {requiresAuth: true},name:'Home'},
             {path: 'manage', component: Manage, meta: {requiresAuth: true},name:'Manage'},
             {path: 'passwordchange', component: Passwordchange, meta: {requiresAuth: true},name:'Passwordchange'},
             {path: 'setupthe', component: Setupthe, meta: {requiresAuth: true},name:'Setupthe'},
-            {path: 'studentspage/:id', component: Studentspage,name:'Studentspage'},
-            {path: 'Studentinfo/:id', component: Studentinfo,name:'Studentinfo'}
+            {path: 'studentspage/:id', component: Studentspage,meta: {requiresAuth: true},name:'Studentspage'},
+            {path: 'studentinfo/:id', component: Studentinfo,meta: {requiresAuth: true},name:'Studentinfo'}
         ]
     },
-    {path: '*', redirect: proRootDic + '/home'}/*默认路由*/
+    {path: '*', redirect: proRootDic + 'home'}/*默认路由*/
 ];
 const router = new VueRouter({
     mode: 'history',
