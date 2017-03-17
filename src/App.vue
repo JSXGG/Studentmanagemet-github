@@ -1,9 +1,10 @@
 <template>
-    <div style="width: 100%;">
+    <div style="width: 100%;height: 100%">
         <sdheader v-if="commConf.isHeader"></sdheader>
         <div class="app-container">
             <router-view></router-view>
         </div>
+        <!--<div class="theboothbar-foot"></div>-->
         <sdfoot v-if="commConf.isFooter"></sdfoot>
     </div>
 </template>
@@ -12,9 +13,9 @@
     @import '../node_modules/vux/src/styles/1px.less';
     @import '../node_modules/vux/src/styles/tap.less';
     .app-container {
+        width: 100%;
         position: absolute;
         margin-top: 46px;
-        width: 100%;
     }
 </style>
 <script>

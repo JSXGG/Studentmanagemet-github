@@ -1,5 +1,5 @@
 <template>
-    <div class="home">
+    <div class="manage">
         <group title="超优教育">
             <cell v-for="item in items" :title="item.name" :inline-desc="item.desc" style="" @click.native="onClick(item.name)"
                   is-link>
@@ -10,6 +10,9 @@
     </div>
 </template>
 <style>
+    .manage{
+        padding-bottom: 60px;
+    }
 </style>
 <script>
     import {Cell, Group} from 'vux'
@@ -23,6 +26,10 @@
                     {name: '四年级一班', desc: '这个是一个美好的班级', icon: require('../../assets/Class.png')},
                     {name: '四年级一班', desc: '这个是一个美好的班级', icon: require('../../assets/Class.png')},
                     {name: '四年级一班', desc: '这个是一个美好的班级', icon: require('../../assets/Class.png')},
+                    {name: '四年级一班', desc: '这个是一个美好的班级', icon: require('../../assets/Class.png')},
+                    {name: '四年级一班', desc: '这个是一个美好的班级', icon: require('../../assets/Class.png')},
+                    {name: '四年级一班', desc: '这个是一个美好的班级', icon: require('../../assets/Class.png')},
+                    {name: '四年级一班', desc: '这个是一个美好的班级', icon: require('../../assets/Class.png')}
                 ]
             }
         },
