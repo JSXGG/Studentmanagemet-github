@@ -39,6 +39,7 @@
                 <h4 class="title">问题反思与 改进方案</h4>
                 <p style="padding: 10px">
                     {{item.nextWeekPlan}}
+                </p>
             </div>
         </div>
         <div class="addbtn">
