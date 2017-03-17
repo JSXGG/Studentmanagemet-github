@@ -66,7 +66,7 @@
     }
 
     .studentinfo .pagebody {
-        margin-bottom: 150px;
+        margin-bottom: 80px;
     }
 
     .studentinfo .block {
@@ -170,7 +170,7 @@
                 });
             },
             clickOntheAddBtn(){
-                this.$router.push({name: 'Commentontheinput',params: { id: '1'}});
+                this.$router.push({name: 'Commentontheinput',params: { id: '1',name:this.$route.params.id}});
             }
         },
         components: {
