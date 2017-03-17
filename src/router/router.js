@@ -8,7 +8,9 @@ const App = resolve => require(['../App'], resolve)
 const Home = resolve => require(['../pages/mainview/Home'], resolve)
 const Manage = resolve => require(['../pages/mainview/Manage'], resolve)
 const Setupthe = resolve => require(['../pages/mainview/Setupthe'], resolve)
-const Passwordchange = resolve => require(['../pages/settingpage/Passwordchange'],resolve)
+const Mobilephonebinding = resolve => require(['../pages/settingpage/Mobilephonebinding'],resolve)
+const Phoneverification = resolve => require(['../pages/settingpage/Phoneverification'],resolve)
+
 const Studentspage = resolve => require(['../pages/studentspage/Studentspage'], resolve)
 const Studentinfo = resolve => require(['../pages/studentspage/Studentinfo'], resolve)
 const Commentontheinput = resolve => require(['../pages/studentspage/Commentontheinput'], resolve)
@@ -22,11 +24,13 @@ const routes = [
         children: [
             {path: 'home', component: Home, meta: {requiresAuth: true},name:'Home'},
             {path: 'manage', component: Manage, meta: {requiresAuth: true},name:'Manage'},
-            {path: 'passwordchange', component: Passwordchange, meta: {requiresAuth: true},name:'Passwordchange'},
+            {path: 'mobilephonebinding', component: Mobilephonebinding, meta: {requiresAuth: true},name:'Mobilephonebinding'},
             {path: 'setupthe', component: Setupthe, meta: {requiresAuth: true},name:'Setupthe'},
             {path: 'studentspage/:id', component: Studentspage,meta: {requiresAuth: true},name:'Studentspage'},
             {path: 'studentinfo/:id', component: Studentinfo,meta: {requiresAuth: true},name:'Studentinfo'},
             {path: 'commentontheinput/:id/:name', component: Commentontheinput,meta: {requiresAuth: true},name:'Commentontheinput'},
+            {path: 'phoneverification/:id/:name', component: Phoneverification,meta: {requiresAuth: true},name:'Phoneverification'},
+
         ]
     },
     {path: '*', redirect: proRootDic + 'home'}/*默认路由*/

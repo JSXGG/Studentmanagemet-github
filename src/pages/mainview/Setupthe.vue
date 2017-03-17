@@ -1,9 +1,14 @@
 <template>
-    <div>
+    <div class="setupthe">
         <group>
-            <cell style="height: 40px" v-for="item in items" :title=item.name @click.native="onClick(item.name)"
-                  is-link>
-                <img slot="icon" width="25" style="display:block;margin-right:5px;" :src=item.icon>
+            <cell  :inline-desc="userName" style="height:60px">
+                <img class="img" slot="icon"  style="display:block;float:right" :src="HeadImage">
+            </cell>
+
+            <cell class="cellId" style="height: 40px" v-for="(item,index) in items":value="item.value"  :title="item.name"  @click.native="onClick(index)"
+                  is-link >
+                <img slot="icon" width="25" style="display:block;margin-right:15px;" :src="item.icon">
+
             </cell>
         </group>
         <h1 style="text-align: center"></h1>
@@ -13,19 +18,36 @@
 </template>
 
 
-<style>
+<style lang="less" rel="stylesheet/less">
+    @import '../../theme.less';
+    .setupthe .img {
+        width: 50px;
+        height: 50px;
+        border-radius: 25px;
+        margin-right:15px;
+        border:1px solid @Bordercolor-color
+
+    }
+    .cellId
+    {
+
+    }
 
 </style>
+
+
 <script>
     import {Cell, Group} from 'vux'
     export default {
         data () {
             return {
                 items: [
-                    {name: '个人信息', icon: require('../../assets/Personalinformation.png')},
-                    {name: '密码重置', icon: require('../../assets/PasswordReset.png')},
-                    {name: '退出登录', icon: require('../../assets/Logout.png')},
+                    {name: '绑定手机', icon: require('../../assets/phone_no.png'),value:'未绑定'},
+                    {name: '绑定学校', icon: require('../../assets/school.png'),value:'未绑定'},
+                    {name: '所在地区', icon: require('../../assets/region.png'),value:'广东广州'},
                 ],
+                HeadImage: require('../../assets/HeadImage.png'),
+                userName:'weng'
             }
         },
         methods: {
@@ -38,16 +60,38 @@
                     tabBarIndex:2
                 });
             },
-            onClick (name)
+            onClick (index)
             {
-                console.log(name)
-                if (name==='密码重置')
+//                console.log(name)
+//                if (name==='密码重置')
+//                {
+//                    console.log(11)
+//                    this.$router.push({name: 'Passwordchange'});
+//
+//                }
+                switch(index)
                 {
-                    console.log(11)
-                    this.$router.push({name: 'Passwordchange'});
+                    case 0:
+                    {
+                        console.log(index)
+                    this.$router.push({name: 'Mobilephonebinding'});
 
+                    }
+                        break;
+                    case 1:
+                    {
+                        console.log(index)
+
+                    }
+                        break;
+                    case 2:
+                    {
+                        console.log(index)
+
+                    }
+                        break;
+                    default:
                 }
-
             }
         },
         components: {
