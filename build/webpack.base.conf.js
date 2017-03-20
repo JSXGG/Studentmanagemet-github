@@ -54,7 +54,7 @@ const webpackConfig = {
             },
             {
                 test: /\.json$/,
-                loader: 'json'
+                loader: 'json-loader'
             },
             {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,

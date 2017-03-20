@@ -83,6 +83,7 @@
                     case 1:
                     {
                         console.log(index)
+                        this.$router.push({name: 'Bindingschool'});
 
                     }
                         break;

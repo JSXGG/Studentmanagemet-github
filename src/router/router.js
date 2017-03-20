@@ -9,6 +9,9 @@ const Home = resolve => require(['../pages/mainview/Home'], resolve)
 const Manage = resolve => require(['../pages/mainview/Manage'], resolve)
 const Setupthe = resolve => require(['../pages/mainview/Setupthe'], resolve)
 const Mobilephonebinding = resolve => require(['../pages/settingpage/Mobilephonebinding'],resolve)
+const Bindingschool = resolve => require(['../pages/settingpage/Bindingschool'],resolve)
+const msg = resolve => require(['../pages/settingpage/msg'],resolve)
+
 const Phoneverification = resolve => require(['../pages/settingpage/Phoneverification'],resolve)
 
 const Studentspage = resolve => require(['../pages/studentspage/Studentspage'], resolve)
@@ -25,6 +28,9 @@ const routes = [
             {path: 'home', component: Home, meta: {requiresAuth: true},name:'Home'},
             {path: 'manage', component: Manage, meta: {requiresAuth: true},name:'Manage'},
             {path: 'mobilephonebinding', component: Mobilephonebinding, meta: {requiresAuth: true},name:'Mobilephonebinding'},
+            {path: 'Bindingschool', component: Bindingschool, meta: {requiresAuth: true},name:'Bindingschool'},
+            {path: 'msg', component: msg, meta: {requiresAuth: true},name:'msg'},
+
             {path: 'setupthe', component: Setupthe, meta: {requiresAuth: true},name:'Setupthe'},
             {path: 'studentspage/:id', component: Studentspage,meta: {requiresAuth: true},name:'Studentspage'},
             {path: 'studentinfo/:id', component: Studentinfo,meta: {requiresAuth: true},name:'Studentinfo'},

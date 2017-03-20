@@ -1,11 +1,11 @@
 <template>
     <div>
-        <div>
+        <div style="margin-top: 12px">
             <divider>短信验证已发送,请填写验证码</divider>
         </div>
 
-        <group>
-            <x-input readonly="readonly" style="height: 40px;color: #666666 "  title="手机号码" v-model="value2"></x-input>
+        <group >
+            <x-input readonly="readonly" style="height: 40px;color: #666666 ;margin-top: 0px"  title="手机号码" v-model="value2"></x-input>
             <x-input style="height: 40px"  placeholder="请输入验证码" title=" 验证码" v-model="value1"></x-input>
         </group>
 
