@@ -1,7 +1,7 @@
 <template>
     <div class="setupthe">
         <group>
-            <cell  :inline-desc="userName" style="height:60px">
+            <cell  :inline-desc="userName" :value="address" style="height:60px">
                 <img class="img" slot="icon"  style="display:block;float:right" :src="HeadImage">
             </cell>
 
@@ -12,6 +12,7 @@
             </cell>
         </group>
         <h1 style="text-align: center"></h1>
+
     </div>
 
 
@@ -26,9 +27,9 @@
     .setupthe .img {
         width: 50px;
         height: 50px;
-        border-radius: 25px;
+        border-radius: 30px;
         margin-right:15px;
-        border:1px solid @Bordercolor-color
+        border:2px solid @theme-color
     }
     .cellId
     {
@@ -44,12 +45,12 @@
         data () {
             return {
                 items: [
-                    {name: '绑定手机', icon: require('../../assets/phone_no.png'),value:'未绑定'},
+//                    {name: '绑定手机', icon: require('../../assets/phone_no.png'),value:'未绑定'},
                     {name: '绑定学校', icon: require('../../assets/school.png'),value:'未绑定'},
-                    {name: '所在地区', icon: require('../../assets/region.png'),value:'广东广州'},
                 ],
                 HeadImage: require('../../assets/HeadImage.png'),
-                userName:'weng'
+                userName:'weng',
+                address:'广东广州'
             }
         },
         methods: {
@@ -73,21 +74,21 @@
 //                }
                 switch(index)
                 {
+//                    case 0:
+//                    {
+//                        console.log(index)
+//                    this.$router.push({name: 'Mobilephonebinding'});
+//
+//                    }
+//                        break;
                     case 0:
-                    {
-                        console.log(index)
-                    this.$router.push({name: 'Mobilephonebinding'});
-
-                    }
-                        break;
-                    case 1:
                     {
                         console.log(index)
                         this.$router.push({name: 'Bindingschool'});
 
                     }
                         break;
-                    case 2:
+                    case 1:
                     {
                         console.log(index)
 

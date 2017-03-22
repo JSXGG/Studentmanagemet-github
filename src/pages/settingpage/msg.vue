@@ -1,11 +1,11 @@
 <template>
     <div>
-        <msg title="审核提交成功" description="请耐心等候审核,审核结果将下发到预留的手机号码!感谢您对我们的支持"  icon="waiting"></msg>
+        <msg title="审核提交成功" description="感谢您的支持,请耐心等候审核结果。"  icon="waiting"></msg>
         <div style="margin-top: 30px">
             <divider>想了解更多信息,欢迎关注我们的公众号</divider>
             <br>
             <div>
-                <img :src="icon" style="width: 60%;margin-left: 20%;margin-top: 15px;">
+                <img :src="icon" style="width: 60%;margin-left: 20%;margin-top: 0px;margin-bottom: 20px">
             </div>
         </div>
     </div>
