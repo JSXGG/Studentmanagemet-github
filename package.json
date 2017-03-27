@@ -1,8 +1,8 @@
 {
-  "name": "healthhandbook",
+  "name": "Studentmanagemet",
   "version": "1.0.0",
-  "description": "HealthHandBook",
-  "author": "David <david.deng@jcinfotech.com>",
+  "description": "Studentmanagemet",
+  "author": "Baird <baird.weng@xggserve.com>",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
