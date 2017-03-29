@@ -9,6 +9,7 @@ const app = new Vue({
     router,
     store
 }).$mount('#app')
+
 /*
 * 全局混合，定义每个Vue实例都会执行。
 * reloadData
@@ -19,5 +20,8 @@ Vue.mixin({
 import  { LoadingPlugin ,ToastPlugin} from 'vux'
 Vue.use(LoadingPlugin);
 Vue.use(ToastPlugin);
+
+window.myVue = Vue;
+
 
 

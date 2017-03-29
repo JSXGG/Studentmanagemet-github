@@ -29,7 +29,7 @@ module.exports = {
     assetsPublicPath: '/',
       proxyTable: {
           '/api': {
-              target: 'http://192.168.9.249',
+              target: 'http://educ.xggserve.com',
               changeOrigin: true
           }
       },

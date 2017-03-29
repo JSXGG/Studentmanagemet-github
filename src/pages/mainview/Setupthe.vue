@@ -1,12 +1,13 @@
 <template>
     <div class="setupthe">
         <group>
-            <cell  :inline-desc="userName" :value="address" style="height:60px">
-                <img class="img" slot="icon"  style="display:block;float:right" :src="HeadImage">
+            <cell :inline-desc="userName" :value="address" style="height:60px">
+                <img class="img" slot="icon" style="display:block;float:right" :src="HeadImage">
             </cell>
 
-            <cell class="cellId" style="height: 40px" v-for="(item,index) in items":value="item.value"  :title="item.name"  @click.native="onClick(index)"
-                  is-link >
+            <cell class="cellId" style="height: 40px" v-for="(item,index) in items" :value="item.value"
+                  :title="item.name" @click.native="onClick(index)"
+                  is-link>
                 <img slot="icon" width="25" style="display:block;margin-right:15px;" :src="item.icon">
 
             </cell>
@@ -21,18 +22,20 @@
 
 <style lang="less" rel="stylesheet/less">
     @import '../../theme.less';
-    .setupthe{
+
+    .setupthe {
         margin-bottom: 55px;
     }
+
     .setupthe .img {
         width: 50px;
         height: 50px;
         border-radius: 30px;
-        margin-right:15px;
-        border:2px solid @theme-color
+        margin-right: 15px;
+        border: 2px solid @theme-color
     }
-    .cellId
-    {
+
+    .cellId {
 
     }
 
@@ -41,16 +44,16 @@
 
 <script>
     import {Cell, Group} from 'vux'
+    import Service from 'service/user'
     export default {
         data () {
             return {
                 items: [
-//                    {name: '绑定手机', icon: require('../../assets/phone_no.png'),value:'未绑定'},
-                    {name: '绑定学校', icon: require('../../assets/school.png'),value:'未绑定'},
+                    {name: '绑定学校', icon: require('../../assets/school.png'), value: ''},
                 ],
                 HeadImage: require('../../assets/HeadImage.png'),
-                userName:'weng',
-                address:'广东广州'
+                userName: 'weng',
+                address: '广东广州'
             }
         },
         methods: {
@@ -60,7 +63,16 @@
                     title: '设置',  //显示标题内容
                     isHeader: true,  //是否显示头部标题
                     isFooter: true,
-                    tabBarIndex:2
+                    tabBarIndex: 2
+                });
+                let that = this;
+                Service.getschoolinfo({}).then(function (response) {
+                    if (response.data && response.data.data) {
+                        that.items[0].value = '已绑定'
+                    }
+                    else {
+                        that.items[0].value = '未绑定'
+                    }
                 });
             },
             onClick (index)
@@ -72,8 +84,7 @@
 //                    this.$router.push({name: 'Passwordchange'});
 //
 //                }
-                switch(index)
-                {
+                switch (index) {
 //                    case 0:
 //                    {
 //                        console.log(index)
@@ -81,15 +92,13 @@
 //
 //                    }
 //                        break;
-                    case 0:
-                    {
+                    case 0: {
                         console.log(index)
                         this.$router.push({name: 'Bindingschool'});
 
                     }
                         break;
-                    case 1:
-                    {
+                    case 1: {
                         console.log(index)
 
                     }
