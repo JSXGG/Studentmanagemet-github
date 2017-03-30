@@ -2,7 +2,9 @@
     <div style="width: 100%;height: 100%">
         <sdheader v-if="commConf.isHeader"></sdheader>
         <div class="app-container">
-            <router-view></router-view>
+            <keep-alive>
+                <router-view></router-view>
+            </keep-alive>
         </div>
         <!--<div class="theboothbar-foot"></div>-->
         <sdfoot v-if="commConf.isFooter"></sdfoot>
@@ -12,6 +14,7 @@
     @import '../node_modules/vux/src/styles/reset.less';
     @import '../node_modules/vux/src/styles/1px.less';
     @import '../node_modules/vux/src/styles/tap.less';
+
     .app-container {
         width: 100%;
         position: absolute;
