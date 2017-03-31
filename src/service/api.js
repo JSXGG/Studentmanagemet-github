@@ -28,22 +28,33 @@ const Api = {
     },
     fetchDataByToken: function (_url, _method, _parameter) {
         if (sessionstorge.getUserToken()) {
+            if(!_parameter){
+                _parameter = {};
+            }
             _parameter['usertoken'] = sessionstorge.getUserToken()
         }
         let config = Api.getCongif(_url, _method, _parameter)
         return axios(config).then((response) => {
             if (response.data &&
-                response.data.error &&
-                response.data.error == 'usertokenInvalid') {
-                Vue.$vux.loading.hide();
-                Vue.$vux.toast.show({
-                    type: 'warn',
-                    text: '登录已经过期，请重新登录'
-                })
-                sessionstorge.cleanUserToken();
-                setTimeout(()=>{
-                    router.push({name:'login'});
-                },500)
+                response.data.error) {
+                if(response.data.error == 'usertokenInvalid'){
+                    Vue.$vux.loading.hide();
+                    Vue.$vux.toast.show({
+                        type: 'warn',
+                        text: '登录已经过期，请重新登录'
+                    })
+                    sessionstorge.cleanUserToken();
+                    setTimeout(()=>{
+                        router.push({name:'login'});
+                    },500)
+                }
+                else {
+                    Vue.$vux.loading.hide();
+                    Vue.$vux.toast.show({
+                        type: 'warn',
+                        text: response.data.error
+                    })
+                }
             }
             return response;
         }).catch(function () {

@@ -17,6 +17,7 @@ const Phoneverification = resolve => require(['../pages/settingpage/Phoneverific
 
 const Studentspage = resolve => require(['../pages/studentspage/Studentspage'], resolve)
 const Studentinfo = resolve => require(['../pages/studentspage/Studentinfo'], resolve)
+const Addstudent = resolve =>require(['../pages/studentspage/Addstudentinfo'])
 const Commentontheinput = resolve => require(['../pages/studentspage/Commentontheinput'], resolve)
 const Login = resolve => require(['../pages/login/Login'], resolve)
 const proRootDic = '/website/studentmanagemet/';
@@ -38,8 +39,9 @@ const routes = [
             {path: 'msg', component: msg, meta: {requiresAuth: true}, name: 'msg'},
 
             {path: 'setupthe', component: Setupthe, meta: {requiresAuth: true}, name: 'Setupthe'},
-            {path: 'studentspage/:id', component: Studentspage, meta: {requiresAuth: true}, name: 'Studentspage'},
+            {path: 'studentspage/:id/:name', component: Studentspage, meta: {requiresAuth: true}, name: 'Studentspage'},
             {path: 'studentinfo/:id', component: Studentinfo, meta: {requiresAuth: true}, name: 'Studentinfo'},
+            {path: 'studentinfo/addstudent/:id', component: Addstudent, meta: {requiresAuth: true}, name: 'Addstudent'},
             {
                 path: 'commentontheinput/:id/:name',
                 component: Commentontheinput,
@@ -82,8 +84,8 @@ router.beforeEach((to, from, next) => {
             next();
         }
     }
-    else{
-        if(to.name !='login'){
+    else {
+        if (to.name != 'login') {
             router.push({name: 'login'});
         }
         else {

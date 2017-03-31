@@ -1,26 +1,25 @@
 <template>
     <div class="studentspage">
-        <flexbox class="flexbox" v-for="item in items">
-            <flexbox-item class="flexboxitem" v-for="c_item in item" @click.native="clickOntheItem(c_item)">
-                <div class="title">{{c_item.number}}</div>
-                <img class="img" :src="c_item.icon"><img>
-                <div class="name">{{c_item.name}}</div>
-            </flexbox-item>
-        </flexbox>
-        <div style="margin: 10px">
+        <group>
+            <cell v-for="item in items" :title="item.name"></cell>
+        </group>
+        <div style="margin: 20px 10px 20px 10px">
             <x-button type="primary" @click.native="clickOntheAdd">添加</x-button>
         </div>
     </div>
 </template>
 <style lang="less" rel="stylesheet/less">
     @import '../../theme.less';
+
     .studentspage {
-        margin: 5px;
+        margin: 0px;
     }
+
     .studentspage .flexbox {
         text-align: center;
         margin-top: 5px;
     }
+
     .studentspage .flexbox .flexboxitem {
         width: 100%;
         height: 30vw;
@@ -33,6 +32,7 @@
         width: 50%;
         height: 15vw;
     }
+
     .studentspage .flexbox .flexboxitem .title {
         width: 97%;
         height: 5vw;
@@ -54,10 +54,14 @@
     }
 </style>
 <script>
-    import {XButton, Flexbox, FlexboxItem, Divider} from 'vux'
+    import {XButton, Cell, Group,Popup} from 'vux'
+    import Service from 'service/student'
     export default {
         data () {
             return {
+                showPopup:false,
+                name: '',
+                classId: '',
                 items: []
             }
         },
@@ -66,25 +70,39 @@
         },
         methods: {
             reloadData: function () {
+                this.name = this.$route.params.name;
+                this.classId = this.$route.params.id;
                 this.$store.commit('COMM_CONF', {
                     isBack: true,
-                    title: '一年级一班',
+                    title: this.name,
                     isHeader: true,
                     isFooter: false,
                 });
                 this.reloadView();
             },
             clickOntheItem(item){
-                this.$router.push({name: 'Studentinfo',params: { id: item.name}});
+                this.$router.push({name: 'Studentinfo', params: {id: item.name}});
             },
             reloadView(){
-                let obj = [
-                    {name: '黄子华', number: '', icon: require('../../assets/Student.png')},
-                    {name: '成易迅', number: '', icon: require('../../assets/Student.png')},
-                    {name: '隍换强', number: '', icon: require('../../assets/Student.png')}];
-                this.items = [obj, obj, obj, obj, obj, obj, obj, obj, obj];
+                var items = [];
+                var that = this;
+                Service.getstudentlist(this.classId).then(function (response) {
+                    if (response.data && response.data.data) {
+                        response.data.data.forEach(function (item) {
+                            let Obj = {
+                                name: item.firstname + item.lastname,
+                                number: '12',
+                                icon: require('../../assets/Student.png')
+                            };
+                            items.push(Obj);
+                        })
+                    }
+                    that.items = items;
+                });
             },
             clickOntheAdd(){
+                this.$router.push({name: 'Addstudent', params: {id: this.classId}});
+                /*
                 this.$vux.loading.show({
                     text: 'Loading'
                 });
@@ -96,15 +114,13 @@
                     setTimeout(()=> {
                         this.$vux.toast.hide();
                     }, 1000)
-                }, 1000)
-
+                }, 1000)*/
             }
         },
         components: {
-            Flexbox,
-            FlexboxItem,
-            Divider,
-            XButton
+            Cell,
+            Group,
+            XButton,
         }
     }
 </script>
