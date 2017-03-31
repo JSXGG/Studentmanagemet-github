@@ -49,9 +49,9 @@
         data () {
             return {
                 items: [
-                    {name: '绑定学校', icon: require('../../assets/school.png'), value: ''},
+                    {name: '绑定学校', icon:'', value: ''},
                 ],
-                HeadImage: require('../../assets/HeadImage.png'),
+                HeadImage: require('../../assets/Teachers.png'),
                 userName: 'weng',
                 address: '广东广州'
             }
@@ -69,9 +69,13 @@
                 Service.getschoolinfo({}).then(function (response) {
                     if (response.data && response.data.data) {
                         that.items[0].value = '已绑定'
+                        that.items[0].icon = require('../../assets/yes_Binding.png')
+
                     }
                     else {
                         that.items[0].value = '未绑定'
+                        that.items[0].icon = require('../../assets/no_Binding.png')
+
                     }
                 });
             },
