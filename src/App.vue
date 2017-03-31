@@ -3,8 +3,9 @@
         <sdheader v-if="commConf.isHeader"></sdheader>
         <div class="app-container">
             <keep-alive>
-                <router-view></router-view>
+                <router-view v-if="$route.meta.keepAlive"></router-view>
             </keep-alive>
+            <router-view v-if="!$route.meta.keepAlive"></router-view>
         </div>
         <!--<div class="theboothbar-foot"></div>-->
         <sdfoot v-if="commConf.isFooter"></sdfoot>

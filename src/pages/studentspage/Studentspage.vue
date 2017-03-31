@@ -4,7 +4,7 @@
             <cell v-for="item in items" :title="item.name"></cell>
         </group>
         <div style="margin: 20px 10px 20px 10px">
-            <x-button type="primary" @click.native="clickOntheAdd">添加</x-button>
+            <x-button type="primary" @click.native="clickOntheAdd">添加学生</x-button>
         </div>
     </div>
 </template>
@@ -101,20 +101,7 @@
                 });
             },
             clickOntheAdd(){
-                this.$router.push({name: 'Addstudent', params: {id: this.classId}});
-                /*
-                this.$vux.loading.show({
-                    text: 'Loading'
-                });
-                setTimeout(()=> {
-                    this.$vux.loading.hide();
-                    this.$vux.toast.show({
-                        text: '添加成功'
-                    })
-                    setTimeout(()=> {
-                        this.$vux.toast.hide();
-                    }, 1000)
-                }, 1000)*/
+                this.$router.push({name: 'Addstudentinfo', params: {id: this.classId}});
             }
         },
         components: {

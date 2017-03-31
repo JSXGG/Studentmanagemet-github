@@ -17,48 +17,28 @@ const Phoneverification = resolve => require(['../pages/settingpage/Phoneverific
 
 const Studentspage = resolve => require(['../pages/studentspage/Studentspage'], resolve)
 const Studentinfo = resolve => require(['../pages/studentspage/Studentinfo'], resolve)
-const Addstudent = resolve =>require(['../pages/studentspage/Addstudentinfo'])
+const Addstudentinfo = resolve =>require(['../pages/studentspage/Addstudentinfo'],resolve)
 const Commentontheinput = resolve => require(['../pages/studentspage/Commentontheinput'], resolve)
 const Login = resolve => require(['../pages/login/Login'], resolve)
 const proRootDic = '/website/studentmanagemet/';
 /*配置路由目录*/
 const routes = [
     {
-        path: proRootDic, component: App, meta: {requiresAuth: true}, redirect: proRootDic + 'login',
-        //配置子路由
+        path: proRootDic, component: App, meta: {keepAlive: true}, redirect: proRootDic + 'login',
+        //配置子路由 meta: {keepAlive: true}
         children: [
-            {path: 'home', component: Home, meta: {requiresAuth: true}, name: 'Home'},
-            {path: 'manage', component: Manage, meta: {requiresAuth: true}, name: 'Manage'},
-            {
-                path: 'mobilephonebinding',
-                component: Mobilephonebinding,
-                meta: {requiresAuth: true},
-                name: 'Mobilephonebinding'
-            },
-            {path: 'Bindingschool', component: Bindingschool, meta: {requiresAuth: true}, name: 'Bindingschool'},
-            {path: 'msg', component: msg, meta: {requiresAuth: true}, name: 'msg'},
-
-            {path: 'setupthe', component: Setupthe, meta: {requiresAuth: true}, name: 'Setupthe'},
-            {path: 'studentspage/:id/:name', component: Studentspage, meta: {requiresAuth: true}, name: 'Studentspage'},
-            {path: 'studentinfo/:id', component: Studentinfo, meta: {requiresAuth: true}, name: 'Studentinfo'},
-            {path: 'studentinfo/addstudent/:id', component: Addstudent, meta: {requiresAuth: true}, name: 'Addstudent'},
-            {
-                path: 'commentontheinput/:id/:name',
-                component: Commentontheinput,
-                meta: {requiresAuth: true},
-                name: 'Commentontheinput'
-            },
-            {
-                path: 'phoneverification/:id/:name',
-                component: Phoneverification,
-                meta: {requiresAuth: true},
-                name: 'Phoneverification'
-            },
-            {
-                path: 'login',
-                component: Login,
-                name: 'login'
-            }
+            {path: 'home', component: Home, meta: {keepAlive: true}, name: 'Home'},
+            {path: 'manage', component: Manage, meta: {keepAlive: true}, name: 'Manage'},
+            {path: 'mobilephonebinding', component: Mobilephonebinding, meta: {keepAlive: true},name: 'Mobilephonebinding'},
+            {path: 'Bindingschool', component: Bindingschool, meta: {keepAlive: true}, name: 'Bindingschool'},
+            {path: 'msg', component: msg, meta: {keepAlive: true}, name: 'msg'},
+            {path: 'setupthe', component: Setupthe, meta: {keepAlive: true}, name: 'Setupthe'},
+            {path: 'studentspage/:id/:name', component: Studentspage, meta: {keepAlive: true}, name: 'Studentspage'},
+            {path: 'studentspage/addstudent/:id', component: Addstudentinfo,meta: {keepAlive: false},name: 'Addstudentinfo'},
+            {path: 'studentinfo/:id', component: Studentinfo, meta: {keepAlive: true}, name: 'Studentinfo'},
+            {path: 'commentontheinput/:id/:name', component: Commentontheinput, meta: {keepAlive: true}, name: 'Commentontheinput'},
+            {path: 'phoneverification/:id/:name', component: Phoneverification, meta: {keepAlive: true}, name: 'Phoneverification'},
+            { path: 'login', component: Login, name: 'login'}
         ]
     },
     {path: '*', redirect: proRootDic + 'login'}/*默认路由*/
