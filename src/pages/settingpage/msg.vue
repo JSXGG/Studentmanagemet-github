@@ -1,7 +1,9 @@
 <template>
     <div>
+
         <msg v-if="Bindingschoolstate==1" title="学校绑定成功" :description="'当前绑定的学校:'+Bindingschool"  icon="success"></msg>
         <msg v-else title="提交审核成功" description="感谢您的支持,请耐心等候审核结果。" icon="waiting"></msg>
+        <x-button  style="width: 90%" @click.native="changeschool"  v-if="Bindingschoolstate==1">更换学校</x-button>
 
         <div style="margin-top: 30px">
             <divider>想了解更多信息,欢迎关注我们的公众号</divider>
@@ -57,6 +59,10 @@
                     });
 
 
+
+            },changeschool () {
+
+                this.$router.push({name: 'Bindingschool'});
 
             }
         }
