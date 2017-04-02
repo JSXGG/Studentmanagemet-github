@@ -92,7 +92,7 @@
                     }
                 });
 
-//                this.$router.push({name: 'msg'});
+                this.$router.push({name: 'msg'});
             }
         }
     }

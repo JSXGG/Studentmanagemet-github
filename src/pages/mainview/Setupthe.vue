@@ -41,7 +41,6 @@
 
 </style>
 
-
 <script>
     import {Cell, Group} from 'vux'
     import Service from 'service/user'
@@ -56,6 +55,7 @@
                 address: '广东广州'
             }
         },
+
         methods: {
             reloadData: function () {
                 this.$store.commit('COMM_CONF', {
@@ -65,7 +65,7 @@
                     isFooter: true,
                     tabBarIndex: 2
                 });
-                let that = this;
+                var that = this;
                 Service.getschoolinfo({}).then(function (response) {
                     if (response.data && response.data.data) {
                         that.items[0].value = '已绑定'
@@ -81,30 +81,24 @@
             },
             onClick (index)
             {
-//                console.log(name)
-//                if (name==='密码重置')
-//                {
-//                    console.log(11)
-//                    this.$router.push({name: 'Passwordchange'});
-//
-//                }
+
                 switch (index) {
-//                    case 0:
-//                    {
-//                        console.log(index)
-//                    this.$router.push({name: 'Mobilephonebinding'});
-//
-//                    }
-//                        break;
                     case 0: {
-                        console.log(index)
-                        this.$router.push({name: 'Bindingschool'});
+
+                        if (this.items[0].value=='已绑定')
+                        {
+                            this.$router.push({name: 'msg',params:{state:'已绑定',Bindingschool:'广州风萧萧'}});
+
+                        }else
+                        {
+                            this.$router.push({name: 'Bindingschool'});
+
+                        }
 
                     }
                         break;
                     case 1: {
                         console.log(index)
-
                     }
                         break;
                     default:

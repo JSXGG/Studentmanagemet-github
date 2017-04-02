@@ -31,7 +31,7 @@ const routes = [
             {path: 'manage', component: Manage, meta: {keepAlive: true}, name: 'Manage'},
             {path: 'mobilephonebinding', component: Mobilephonebinding, meta: {keepAlive: true},name: 'Mobilephonebinding'},
             {path: 'Bindingschool', component: Bindingschool, meta: {keepAlive: true}, name: 'Bindingschool'},
-            {path: 'msg', component: msg, meta: {keepAlive: true}, name: 'msg'},
+            {path: 'msg/:state/:Bindingschool', component: msg, meta: {keepAlive: true}, name: 'msg'},
             {path: 'setupthe', component: Setupthe, meta: {keepAlive: true}, name: 'Setupthe'},
             {path: 'studentspage/:id/:name', component: Studentspage, meta: {keepAlive: true}, name: 'Studentspage'},
             {path: 'studentspage/addstudent/:id', component: Addstudentinfo,meta: {keepAlive: false},name: 'Addstudentinfo'},
