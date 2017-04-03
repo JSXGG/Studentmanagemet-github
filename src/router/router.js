@@ -13,6 +13,7 @@ const Mobilephonebinding = resolve => require(['../pages/settingpage/Mobilephone
 const Bindingschool = resolve => require(['../pages/settingpage/Bindingschool'], resolve)
 const msg = resolve => require(['../pages/settingpage/msg'], resolve)
 const TeachersManagement = resolve => require(['../pages/settingpage/TeachersManagement'], resolve)
+const Addteacher = resolve => require(['../pages/settingpage/Addteacher'], resolve)
 
 const Phoneverification = resolve => require(['../pages/settingpage/Phoneverification'], resolve)
 const Studentspage = resolve => require(['../pages/studentspage/Studentspage'], resolve)
@@ -34,6 +35,7 @@ const routes = [
             {path: 'Bindingschool', component: Bindingschool, meta: {keepAlive: true}, name: 'Bindingschool'},
             {path: 'msg', component: msg, meta: {keepAlive: true}, name: 'msg'},
             {path: 'TeachersManagement', component: TeachersManagement, meta: {keepAlive: true}, name: 'TeachersManagement'},
+            {path: 'Addteacher', component: Addteacher, meta: {keepAlive: true}, name: 'Addteacher'},
 
             {path: 'setupthe', component: Setupthe, meta: {keepAlive: true}, name: 'Setupthe'},
             {path: 'studentspage/:id/:name', component: Studentspage, meta: {keepAlive: true}, name: 'Studentspage'},

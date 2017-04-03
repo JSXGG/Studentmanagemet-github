@@ -53,6 +53,8 @@
             clickOntheAdd()
             {
                 console.log('点击了添加教师');
+                this.$router.push({name: 'Addteacher'});
+
 
             }
         }

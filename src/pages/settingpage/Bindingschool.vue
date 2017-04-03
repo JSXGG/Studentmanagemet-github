@@ -41,7 +41,7 @@
             }
         },
         components: {
-            PopupPicker,
+        PopupPicker,
             Group,
             Picker,
             XButton,
