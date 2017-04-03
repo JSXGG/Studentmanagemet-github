@@ -12,15 +12,16 @@ const Setupthe = resolve => require(['../pages/mainview/Setupthe'], resolve)
 const Mobilephonebinding = resolve => require(['../pages/settingpage/Mobilephonebinding'], resolve)
 const Bindingschool = resolve => require(['../pages/settingpage/Bindingschool'], resolve)
 const msg = resolve => require(['../pages/settingpage/msg'], resolve)
+const TeachersManagement = resolve => require(['../pages/settingpage/TeachersManagement'], resolve)
 
 const Phoneverification = resolve => require(['../pages/settingpage/Phoneverification'], resolve)
-
 const Studentspage = resolve => require(['../pages/studentspage/Studentspage'], resolve)
 const Studentinfo = resolve => require(['../pages/studentspage/Studentinfo'], resolve)
 const Addstudentinfo = resolve =>require(['../pages/studentspage/Addstudentinfo'],resolve)
 const Commentontheinput = resolve => require(['../pages/studentspage/Commentontheinput'], resolve)
 const Login = resolve => require(['../pages/login/Login'], resolve)
 const proRootDic = '/website/studentmanagemet/';
+
 /*配置路由目录*/
 const routes = [
     {
@@ -31,7 +32,9 @@ const routes = [
             {path: 'manage', component: Manage, meta: {keepAlive: true}, name: 'Manage'},
             {path: 'mobilephonebinding', component: Mobilephonebinding, meta: {keepAlive: true},name: 'Mobilephonebinding'},
             {path: 'Bindingschool', component: Bindingschool, meta: {keepAlive: true}, name: 'Bindingschool'},
-            {path: 'msg/:state/:Bindingschool', component: msg, meta: {keepAlive: true}, name: 'msg'},
+            {path: 'msg', component: msg, meta: {keepAlive: true}, name: 'msg'},
+            {path: 'TeachersManagement', component: TeachersManagement, meta: {keepAlive: true}, name: 'TeachersManagement'},
+
             {path: 'setupthe', component: Setupthe, meta: {keepAlive: true}, name: 'Setupthe'},
             {path: 'studentspage/:id/:name', component: Studentspage, meta: {keepAlive: true}, name: 'Studentspage'},
             {path: 'studentspage/addstudent/:id', component: Addstudentinfo,meta: {keepAlive: false},name: 'Addstudentinfo'},

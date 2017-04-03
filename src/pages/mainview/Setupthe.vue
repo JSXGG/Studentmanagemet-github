@@ -30,9 +30,9 @@
     .setupthe .img {
         width: 50px;
         height: 50px;
-        border-radius: 30px;
+        /*<!--border-radius: 30px;-->*/
         margin-right: 15px;
-        border: 2px solid @theme-color
+        /*<!--border: 2px solid @theme-color-->*/
     }
 
     .cellId {
@@ -48,9 +48,10 @@
         data () {
             return {
                 items: [
-                    {name: '绑定学校', icon:'', value: ''},
+                    {name: '绑定学校', icon:require('../../assets/Binding.png'), value: ''},
+                    {name: '教师管理', icon:require('../../assets/Teachersmanagement.png'), value: ''},
                 ],
-                HeadImage: require('../../assets/Teachers.png'),
+                HeadImage: require('../../assets/Headteachers.png'),
                 userName: 'weng',
                 address: '广东广州'
             }
@@ -69,13 +70,10 @@
                 Service.getschoolinfo({}).then(function (response) {
                     if (response.data && response.data.data) {
                         that.items[0].value = '已绑定'
-                        that.items[0].icon = require('../../assets/yes_Binding.png')
 
                     }
                     else {
                         that.items[0].value = '未绑定'
-                        that.items[0].icon = require('../../assets/no_Binding.png')
-
                     }
                 });
             },
@@ -98,14 +96,16 @@
                     }
                         break;
                     case 1: {
-                        console.log(index)
+
+                        this.$router.push({name:'TeachersManagement'});
+
                     }
                         break;
                     default:
                 }
             }
         },
-        components: {
+         components: {
             Group,
             Cell
         }

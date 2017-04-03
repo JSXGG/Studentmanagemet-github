@@ -10,4 +10,8 @@ UserService.getschoolinfo = (model)=> {
 UserService.gettecherinfobyid = (model)=>{
     return Api.fetchDataByToken('/api/gettecherinfobyid', 'post', model);
 };
+/*绑定学校*/
+UserService.getbindingschool = (model)=>{
+    return Api.fetchDataByToken('/api/bindingschool', 'post', model);
+};
 export default UserService;

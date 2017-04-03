@@ -84,15 +84,17 @@
                 })
             },
             submit(){
-                console.log(this.addressValue);
                 let that = this;
-                Service.gettecherinfobyid({teacherid: '1'}).then(function (response) {
-                    if (response.data && response.data.result == '1') {
-                        that.getschoolinfo();
-                    }
-                });
+                  Service.getbindingschool(that.infoData).then(function (response)
+                  {
+                      if (response.data && response.data.result == '1')
+                      {
+                         console.log('成功了');console.log(that.infoData);
 
-                this.$router.push({name: 'msg',params:{state:'',Bindingschool:''}});
+                      }
+                  });
+
+                this.$router.push({name: 'msg',params:{state:'d',Bindingschool:'s'}});
             }
         }
     }
