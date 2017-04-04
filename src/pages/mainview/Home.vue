@@ -19,7 +19,7 @@
                </group>
             <div style="margin-left: 10px;margin-right:10px;margin-bottom: 60px;margin-top: 20px">
 
-                <actionsheet v-model="show5" :menus="menus5" show-cancel @on-click-menu="click(1)">
+                <actionsheet v-model="show5" :menus="menus5"@on-click-menu="click" @on-click-menu-delete="onDelete" show-cancel>
                 </actionsheet>
                 <x-button class="btn" @click.native="submit" type="primary">上传数据</x-button>
 
@@ -42,43 +42,46 @@
         data () {
             return {
                 items: [
-                    {name: '张学友', value: '0',record:'出勤'},
-                    {name: '郭富城', value: '1',record:'缺勤'},
-                    {name: '刘德华', value: '1',record:'缺勤'},
-                    {name: '黎明',  value: '1',record:'缺勤'},
-                    {name: '黄家驹', value: '1',record:'缺勤'},
-                    {name: '黄家驹', value: '1',record:'缺勤'},
-                    {name: '黄家驹', value: '1',record:'缺勤'},
-                    {name: '黄家驹', value: '1',record:'缺勤'},
-                    {name: '黄家驹', value: '1',record:'缺勤'},
-                    {name: '黄家驹', value: '1',record:'缺勤'},
-                    {name: '黄家驹', value: '1',record:'缺勤'},
-                    {name: '黄家驹', value: '1',record:'缺勤'},
-                    {name: '黄家驹', value: '1',record:'缺勤'},
-
-
-                ],value: 0,
+                    {name: '张学友', value: '0',record:''},
+                    {name: '郭富城', value: '0',record:''},
+                    {name: '刘德华', value: '0',record:''},
+                    {name: '黎明',   value: '0',record:''},
+                    {name: '黄家强', value: '0',record:''},
+                    {name: '黄彦祖', value: '0',record:''},
+                    {name: '张家辉', value: '0',record:''},
+                    {name: '吴孟达', value: '0',record:''},
+                    {name: '周星驰', value: '0',record:''},
+                    {name: '黄嘉良', value: '0',record:''},
+                    {name: '黄渤',   value: '0',record:''},
+                    {name: '张晓军', value: '0',record:''},
+                    {name: '陈奕迅', value: '0',record:''},
+                ],
+                value: '0',
+                show5: false,
+                a:'',
                 icon0:require('../../assets/q_0.png'),
                 icon1:require('../../assets/q_1.png'),
-                menus5: [{
+                menus5: [
+                    {
                     label: '出勤状况<br/><span style="color:#666;font-size:12px;">请选择出勤情况</span>',
-                    type: 'info'
-                }, {
+                    type: 'info'},
+                    {
                     label: '请假',
                     type: 'primary',
-                    value: 'primary'
-                }, {
+                    value: '请假'
+                    },
+                    {
                     label: '迟到',
                     type: 'warn',
-                    value: 'primary'
+                    value: '迟到'
 
-                }, {
+                  },
+                    {
                     label: '缺勤',
                     type: 'warn',
-                    value: 'primary'
+                    value: '缺勤'
 
                 }],
-                show5: false,
 
             }
         },
@@ -94,19 +97,40 @@
             },
             consoleIndex (consoleIndex) {
                 console.log(consoleIndex);
-                this.value=consoleIndex;
+                let self =this;
+                self.value=consoleIndex;
 
             },
             onClick (Index) {
+                console.log(Index);
+                let self =this;
+                self.show5="true"
+                this.a=Index;
 
-                this.show5="true"
 
             },
             click (key) {
-                console.log(key)
-                this.show5="false"
+                console.log(key);
+                let self =this;
+                self.show5="false"
+                let Name =this.items[this.a];
 
-            },
+                if (key!='cancel')
+                {
+                    let value= {name: Name.name, value: '1',record:key}
+                    this.items.splice(this.a,1,value);
+                }else
+                {
+                    let value= {name: Name.name, value: '0',record:''}
+                    this.items.splice(this.a,1,value);
+                }
+
+
+            },submit()
+            {
+
+
+            }
         },
         components: {
             ButtonTab,
