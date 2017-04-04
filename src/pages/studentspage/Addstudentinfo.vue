@@ -4,7 +4,7 @@
             <x-input v-model="item.value" style="height: 30px" :placeholder="item.placeholder"
                      :type="item.type"></x-input>
         </group>
-        <div style="margin-left: 10px;margin-right:10px;margin-top: 20px;">
+        <div style="margin-left: 10px;margin-right:10px;margin-top: 20px;margin-bottom: 10px">
             <x-button class="btn" @click.native="clickOntheEnter" type="primary">确定</x-button>
         </div>
     </div>

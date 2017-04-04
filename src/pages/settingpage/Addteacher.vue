@@ -1,9 +1,9 @@
 <template>
     <div >
         <group>
-            <x-input v-model="wqq" style="height: 30px" placeholder="请输入老师的姓" title="   姓:"></x-input>
-            <x-input v-model="wqq" style="height: 30px" placeholder="请输入老师的名" title="   名:"></x-input>
-            <x-input v-model="wqq" style="height: 30px" placeholder="请输入老师的联系电话" title="联系电话:"></x-input>
+            <x-input v-model="surname" style="height: 30px" placeholder="请输入老师的姓" title="教师的姓:"></x-input>
+            <x-input v-model="name" style="height: 30px" placeholder="请输入老师的名" title="教师的名:"></x-input>
+            <x-input v-model="PhoneNumber" style="height: 30px" placeholder="请输入老师的联系电话" title="联系电话:"></x-input>
 
             <popup-picker  :title="title1"  :data="list1"  v-model="value1" placeholder="请选择一个系" ></popup-picker>
             <popup-picker  :title="title2" :data="list2"  v-model="value2" placeholder="请选择一个科目" ></popup-picker>
@@ -38,10 +38,13 @@
                 list2: [['数学老师', '语文老师', '英语老师', '音乐老师']],
 
                 title1: "所属系部:",
-                title2: "科    目:",
+                title2: "所属科目:",
 
                 value1: [],
                 value2: [],
+                surname:'',
+                name:'',
+                PhoneNumber:''
 
 
             }

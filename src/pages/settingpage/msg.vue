@@ -3,7 +3,7 @@
 
         <msg v-if="Bindingschoolstate==1" title="学校绑定成功" :description="'当前绑定的学校:'+Bindingschool"  icon="success">
         </msg>
-        <x-button  v-if="Bindingschoolstate==1" style="width: 90%" @click.native="changeschool">更换学校</x-button>
+        <x-button  v-if="Bindingschoolstate==1" style="width: 90%" @click.native="showLoading">更换学校</x-button>
         <msg v-if="Bindingschoolstate!=1" title="提交审核成功" description="感谢您的支持,请耐心等候审核结果。" icon="waiting"></msg>
 
         <div style="margin-top: 30px">
@@ -24,10 +24,12 @@
     import {Msg, Divider, XButton, Qrcode} from 'vux'
 
     export default{
+
         components: {
             Msg,
             Divider,
             XButton, Qrcode
+
         },
         computed: {
             Bindingschoolstate(){
@@ -44,7 +46,10 @@
             return{
                 icon: require('../../assets/Qrcode.jpg'),
                 state:this.$route.params.state,
-                Bindingschool:this.$route.params.Bindingschool
+                Bindingschool:this.$route.params.Bindingschool,
+                show1: false,
+                text1: 'Processing'
+
             }
         },
         methods: {
@@ -59,12 +64,16 @@
                     });
 
 
+            },showLoading () {
+                this.$vux.loading.show({
+                    text: '请稍后...'
+                })
+                setTimeout(() => {
+                    this.$vux.loading.hide()
+                    this.$router.push({name: 'Bindingschool'});
+                }, 1000)
+            },
 
-            },changeschool () {
-
-                this.$router.push({name: 'Bindingschool'});
-
-            }
         }
     }
 </script>

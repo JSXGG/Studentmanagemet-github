@@ -1,9 +1,9 @@
 <template>
     <div>
         <group>
-            <x-input v-model="infoData.contact" style="height: 40px" placeholder="请输入联系人姓名" title="联系人姓名"></x-input>
-            <x-input v-model="infoData.tel" style="height: 40px" placeholder="请输入联系人电话" title="联系人电话"></x-input>
-            <x-input v-model="infoData.name" style="height: 40px" placeholder="请输入学校全称" title="所属 学校"></x-input>
+            <x-input v-model="infoData.contact" style="height: 30px" placeholder="请输入联系人姓名" title="联系姓名:"></x-input>
+            <x-input v-model="infoData.tel" style="height: 30px" placeholder="请输入联系人电话" title="联系电话:"></x-input>
+            <x-input v-model="infoData.name" style="height: 40px" placeholder="请输入学校全称" title="所属学校:"></x-input>
             <x-address :title="title2" v-model="addressValue" placeholder="请选择学校地址" raw-value :list="addressData"
                        value-text-align="left"></x-address>
             <x-textarea v-model="infoData.detailedaddress" placeholder="请填写详细地址"></x-textarea>
@@ -27,15 +27,16 @@
         XInput,
         XAddress,
         XTextarea,
-        ChinaAddressData
+        ChinaAddressData,TransferDomDirective as TransferDom,Loading
     } from 'vux'
     import Service from 'service/user'
     export default{
+
         data(){
             return {
                 list1: [['广东中山大学', '广东暨南大学', '广东理工大学', '广州风萧萧培训机构']],
-                title: "所属学校",
-                title2: "学校地址",
+                title: "所属学校:",
+                title2: "学校地址:",
                 addressData: ChinaAddressData,
                 infoData: {},
             }
@@ -46,7 +47,7 @@
             Picker,
             XButton,
             Divider,
-            Cell, XInput, XAddress, XTextarea
+            Cell, XInput, XAddress, XTextarea,
         },
         //计算属性。
         computed: {
@@ -84,17 +85,25 @@
                 })
             },
             submit(){
-                let that = this;
-                  Service.getbindingschool(that.infoData).then(function (response)
-                  {
-                      if (response.data && response.data.result == '1')
-                      {
-                         console.log('成功了');console.log(that.infoData);
+                this.$vux.loading.show({
+                    text: '请稍后...'
+                })
+                setTimeout(() => {
 
-                      }
-                  });
+                    this.$vux.loading.hide()
+                    let that = this;
+                    Service.getbindingschool(that.infoData).then(function (response)
+                    {
+                        if (response.data && response.data.result == '1')
+                        {
 
-                this.$router.push({name: 'msg',params:{state:'d',Bindingschool:'s'}});
+                        }
+                    });
+                    this.$router.push({name: 'msg',params:{state:'d',Bindingschool:'s'}});
+
+                }, 1000)
+
+
             }
         }
     }
