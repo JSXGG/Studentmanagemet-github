@@ -10,19 +10,17 @@
             <divider>请选择缺勤的同学</divider>
 
                 <group >
-
                     <cell class="cellId" style="height: 30px" v-for="(item,index) in items"
                           :title="item.name" @click.native="onClick(index)" :value="item.record"
                           is-link>
                         <img  v-if="item.value==0" slot="icon" width="25" style="display:block;margin-right:15px;" :src="icon0">
                         <img  v-else  slot="icon" width="25" style="display:block;margin-right:15px;" :src="icon1">
-
                         <actionsheet v-model="show5" :menus="menus5" show-cancel @on-click-menu="click(1)"></actionsheet>
-
                     </cell>
-
-
                </group>
+            <div style="margin-left: 10px;margin-right:10px;margin-bottom: 60px;margin-top: 20px">
+                <x-button class="btn" @click.native="submit" type="primary">上传数据</x-button>
+            </div>
 
         </div>
 
@@ -36,13 +34,26 @@
 
 </style>
 <script>
-    import { ButtonTab, ButtonTabItem, Divider, Checklist,Group,Cell,Checker,CheckerItem,Popup, Actionsheet,Toast} from 'vux'
+    import { ButtonTab, ButtonTabItem, Divider, Checklist,Group,Cell,Checker,CheckerItem,Popup, Actionsheet,Toast,XButton} from 'vux'
     export default {
         data () {
             return {
                 items: [
                     {name: '张学友', value: '0',record:'出勤'},
                     {name: '郭富城', value: '1',record:'缺勤'},
+                    {name: '刘德华', value: '1',record:'缺勤'},
+                    {name: '黎明', value: '1',record:'缺勤'},
+                    {name: '黄家驹', value: '1',record:'缺勤'},
+                    {name: '黄家驹', value: '1',record:'缺勤'},
+                    {name: '黄家驹', value: '1',record:'缺勤'},
+                    {name: '黄家驹', value: '1',record:'缺勤'},
+                    {name: '黄家驹', value: '1',record:'缺勤'},
+                    {name: '黄家驹', value: '1',record:'缺勤'},
+                    {name: '黄家驹', value: '1',record:'缺勤'},
+                    {name: '黄家驹', value: '1',record:'缺勤'},
+                    {name: '黄家驹', value: '1',record:'缺勤'},
+
+
                 ],value: 0,
                 icon0:require('../../assets/q_0.png'),
                 icon1:require('../../assets/q_1.png'),
@@ -93,7 +104,7 @@
         components: {
             ButtonTab,
             ButtonTabItem,
-            Divider,Checklist,Group,Cell,Checker,CheckerItem,Popup, Actionsheet,Toast
+            Divider,Checklist,Group,Cell,Checker,CheckerItem,Popup, Actionsheet,Toast,XButton
 
         },
 
