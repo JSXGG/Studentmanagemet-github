@@ -15,11 +15,14 @@
                           is-link>
                         <img  v-if="item.value==0" slot="icon" width="25" style="display:block;margin-right:15px;" :src="icon0">
                         <img  v-else  slot="icon" width="25" style="display:block;margin-right:15px;" :src="icon1">
-                        <actionsheet v-model="show5" :menus="menus5" show-cancel @on-click-menu="click(1)"></actionsheet>
                     </cell>
                </group>
             <div style="margin-left: 10px;margin-right:10px;margin-bottom: 60px;margin-top: 20px">
+
+                <actionsheet v-model="show5" :menus="menus5" show-cancel @on-click-menu="click(1)">
+                </actionsheet>
                 <x-button class="btn" @click.native="submit" type="primary">上传数据</x-button>
+
             </div>
 
         </div>
@@ -42,7 +45,7 @@
                     {name: '张学友', value: '0',record:'出勤'},
                     {name: '郭富城', value: '1',record:'缺勤'},
                     {name: '刘德华', value: '1',record:'缺勤'},
-                    {name: '黎明', value: '1',record:'缺勤'},
+                    {name: '黎明',  value: '1',record:'缺勤'},
                     {name: '黄家驹', value: '1',record:'缺勤'},
                     {name: '黄家驹', value: '1',record:'缺勤'},
                     {name: '黄家驹', value: '1',record:'缺勤'},
@@ -66,10 +69,14 @@
                     value: 'primary'
                 }, {
                     label: '迟到',
-                    type: 'warn'
+                    type: 'warn',
+                    value: 'primary'
+
                 }, {
                     label: '缺勤',
-                    type: 'warn'
+                    type: 'warn',
+                    value: 'primary'
+
                 }],
                 show5: false,
 
