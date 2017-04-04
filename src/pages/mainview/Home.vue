@@ -1,67 +1,103 @@
 <template>
-    <div class="home">
-        <div class="groupcontent" v-for="item in items">
-            <div style="font-size: 0.8rem;display: flex">
-                <flexbox style="background-color: #e1e1e1;height: 25px;color: gray">
-                    <flexbox-item>
-                        <div style="padding-left: 10px">{{item.title}}</div>
-                    </flexbox-item>
-                    <flexbox-item>
-                        <div style="text-align: right; padding-right: 5px">{{item.time}}</div>
-                    </flexbox-item>
-                </flexbox>
-            </div>
-            <div style="font-size: 0.9rem;margin-top: 10px;padding: 10px">{{item.content}}</div>
+    <div style="padding: 15px;">
+
+        <button-tab>
+            <button-tab-item   :value="value" @on-item-click="consoleIndex(0)" selected>考勤</button-tab-item>
+            <button-tab-item    @on-item-click="consoleIndex(1)">考勤记录</button-tab-item>
+        </button-tab>
+        <div v-if="value==0" style="margin-top: 10px;" >
+
+            <divider>请选择缺勤的同学</divider>
+
+                <group >
+
+                    <cell class="cellId" style="height: 30px" v-for="(item,index) in items"
+                          :title="item.name" @click.native="onClick(index)" :value="item.record"
+                          is-link>
+                        <img  v-if="item.value==0" slot="icon" width="25" style="display:block;margin-right:15px;" :src="icon0">
+                        <img  v-else  slot="icon" width="25" style="display:block;margin-right:15px;" :src="icon1">
+
+                        <actionsheet v-model="show5" :menus="menus5" show-cancel @on-click-menu="click(1)"></actionsheet>
+
+                    </cell>
+
+
+               </group>
+
+        </div>
+
+        <div v-else>
+
         </div>
     </div>
 </template>
 
 <style>
-    .home{
-        padding-bottom: 55px;
-    }
-    .home .groupcontent {
-        margin-top: 10px;
-        margin: 10px;
-        overflow: hidden;
-        background-color: white;
-        min-height: 120px;
-        border-radius: 10px;
-        box-shadow: 0 1px 1px #d6d6d6;
-    }
+
 </style>
 <script>
-    import {Flexbox, Group, FlexboxItem} from 'vux'
+    import { ButtonTab, ButtonTabItem, Divider, Checklist,Group,Cell,Checker,CheckerItem,Popup, Actionsheet,Toast} from 'vux'
     export default {
         data () {
             return {
                 items: [
-                    {title: '生日提醒', content: '今天是小明同学的生日，快快给他祝福吧。',time:"34分钟前"},
-                    {title: '公告', content: '今天需要大家写作业，写报告，计划周五去旅游。',time:"1个小时前"},
-                    {title: '生日提醒', content: '今天是花花的生日。',time:"2017-01-01"},
-                    {title: '菜单', content: '周五菜单是红烧肉。',time:"2016-10-10"},
-                    {title: '生日提醒', content: '今天是花花的生日。',time:"2017-01-01"},
-                ]
+                    {name: '张学友', value: '0',record:'出勤'},
+                    {name: '郭富城', value: '1',record:'缺勤'},
+                ],value: 0,
+                icon0:require('../../assets/q_0.png'),
+                icon1:require('../../assets/q_1.png'),
+                menus5: [{
+                    label: '出勤状况<br/><span style="color:#666;font-size:12px;">请选择出勤情况</span>',
+                    type: 'info'
+                }, {
+                    label: '请假',
+                    type: 'primary',
+                    value: 'primary'
+                }, {
+                    label: '迟到',
+                    type: 'warn'
+                }, {
+                    label: '缺勤',
+                    type: 'warn'
+                }],
+                show5: false,
+
             }
         },
         methods: {
             reloadData: function () {
                 this.$store.commit('COMM_CONF', {
                     isBack: false,   //是否显示返回
-                    title: '主页',  //显示标题内容
+                    title: '学生考勤',  //显示标题内容
                     isHeader: true,  //是否显示头部标题
                     isFooter: true,
                     tabBarIndex: 0
                 });
             },
-            onClick(name){
-                console.log(name);
-            }
+            consoleIndex (consoleIndex) {
+                console.log(consoleIndex);
+                this.value=consoleIndex;
+
+            },
+            onClick (Index) {
+
+                this.show5="true"
+
+            },
+            click (key) {
+                console.log(key)
+                this.show5="false"
+
+            },
         },
         components: {
-            Flexbox,
-            Group,
-            FlexboxItem
-        }
-    }
+            ButtonTab,
+            ButtonTabItem,
+            Divider,Checklist,Group,Cell,Checker,CheckerItem,Popup, Actionsheet,Toast
+
+        },
+
+
+
+}
 </script>

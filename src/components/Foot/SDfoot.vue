@@ -28,7 +28,7 @@
                     {
                         iconUnSelect: require('../../assets/home_unselect.png'),
                         iconSelect: require('../../assets/home_select.png'),
-                        label: '主页',
+                        label: '学生考勤',
                         selected: false
                     },
                     {
