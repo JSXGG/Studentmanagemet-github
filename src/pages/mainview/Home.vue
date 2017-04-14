@@ -13,18 +13,14 @@
                       :title="item.name" @click.native="onClick(index)"
                       is-link>
 
-
                     <!--<img v-if="item.value==0" slot="icon" width="25" style="display:block;margin-right:15px;"-->
                          <!--:src="icon0">-->
                     <!--<img v-else slot="icon" width="25" style="display:block;margin-right:15px;" :src="icon1">-->
-
-
-
                     <img  v-if="item.value==0"   width="25" height="25" style="margin-right: 10px;":src="icon3">
                     <img v-else  width="25" height="25" style="margin-right: 10px;":src="icon4">
 
-                    <img  v-if="item.record==0"  width="25" height="25" style="margin-right: 10px;":src="icon5">
-                    <img  v-else   width="25" height="25" style="margin-right: 10px;":src="icon6">
+                    <!--<img  v-if="item.record==0"  width="25" height="25" style="margin-right: 10px;":src="icon5">-->
+                    <!--<img  v-else   width="25" height="25" style="margin-right: 10px;":src="icon6">-->
 
 
                 </cell>
@@ -50,6 +46,9 @@
 
 </style>
 <script>
+
+    import Service from 'service/student'
+
     import {
         ButtonTab,
         ButtonTabItem,
@@ -98,24 +97,24 @@
 //                        type: 'info'
 //                    },
                     {
-                        label: '签到 (1)',
+                        label: '进入学校',
                         type: 'primary',
                         value: '1'
                     },
                     {
-                        label: '签到 (2)',
+                        label: '离开机构',
                         type: 'primary',
                         value: '3'
                     },
                     {
-                        label: '取消签到 (1)',
+                        label: '进入学校',
                         type: 'warn',
                         value: '2'
 
                     },
 
                     {
-                        label: '取消签到 (2)',
+                        label: '离开机构',
                         type: 'warn',
                         value: '4'
                     }]
@@ -130,6 +129,25 @@
                     isHeader: true,  //是否显示头部标题
                     isFooter: true,
                     tabBarIndex: 0
+                });
+
+               this.getclass(6)
+            },
+
+             getclass(classid)
+            {
+
+                console.log(classid);
+                var that = this;
+                Service.getstudentlist(classid).then(function (response) {
+                    if (response.data && response.data.data) {
+
+                        console.log('获取到的学生'+response.data);
+
+                    }
+                    else {
+
+                    }
                 });
             },
             consoleIndex (consoleIndex) {
@@ -147,10 +165,27 @@
 
             },
             onDelete(){
-
+                var date = new Date();
+                var seperator1 = "-";
+                var seperator2 = ":";
+                var month = date.getMonth() + 1;
+                var strDate = date.getDate();
+                if (month >= 1 && month <= 9) {
+                    month = "0" + month;
+                }
+                if (strDate >= 0 && strDate <= 9) {
+                    strDate = "0" + strDate;
+                }
+                var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+                    + " " + date.getHours() + seperator2 + date.getMinutes()
+                    + seperator2 + date.getSeconds();
+                return currentdate;
             },
             click (key) {
-                console.log(key);
+                console.log( this.onDelete());
+
+
+
                 let self = this;
                 self.show5 = false;
                 let Name = this.items[this.a];
@@ -183,7 +218,7 @@
             ButtonTabItem,
             Divider, Checklist, Group, Cell, Checker, CheckerItem, Popup, Actionsheet, Toast, XButton
 
-        },
+        }
 
 
     }
