@@ -39,7 +39,7 @@ const routes = [
 
             {path: 'setupthe', component: Setupthe, meta: {keepAlive: true}, name: 'Setupthe'},
             {path: 'studentspage/:id/:name', component: Studentspage, meta: {keepAlive: true}, name: 'Studentspage'},
-            {path: 'studentspage/addstudent/:id', component: Addstudentinfo,meta: {keepAlive: false},name: 'Addstudentinfo'},
+            {path: 'studentspage/addstudent/:id/:studentid', component: Addstudentinfo,meta: {keepAlive: false},name: 'Addstudentinfo'},
             {path: 'studentinfo/:id', component: Studentinfo, meta: {keepAlive: true}, name: 'Studentinfo'},
             {path: 'commentontheinput/:id/:name', component: Commentontheinput, meta: {keepAlive: true}, name: 'Commentontheinput'},
             {path: 'phoneverification/:id/:name', component: Phoneverification, meta: {keepAlive: true}, name: 'Phoneverification'},

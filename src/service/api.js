@@ -44,6 +44,7 @@ const Api = {
                         text: '登录已经过期，请重新登录'
                     })
                     sessionstorge.cleanUserToken();
+                    sessionstorge.cleanUserInfo();
                     setTimeout(()=>{
                         router.push({name:'login'});
                     },500)

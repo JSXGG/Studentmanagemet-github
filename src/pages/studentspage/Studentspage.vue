@@ -1,11 +1,15 @@
 <template>
     <div class="studentspage">
         <group>
-            <cell v-for="item in items" :title="item.name"></cell>
+            <cell v-for="item in items" :title="item.name" @click.native="onClick(item)" is-link
+                  :value="item.moment | moment"></cell>
         </group>
         <div style="margin: 20px 10px 20px 10px">
             <x-button type="primary" @click.native="clickOntheAdd">添加学生</x-button>
         </div>
+        <actionsheet v-model="sheetModel" :menus="menusOptions" @on-click-menu="clickMenu"
+                     show-cancel>
+        </actionsheet>
     </div>
 </template>
 <style lang="less" rel="stylesheet/less">
@@ -54,21 +58,50 @@
     }
 </style>
 <script>
-    import {XButton, Cell, Group,Popup} from 'vux'
+    import {XButton, Cell, Group, Popup, Actionsheet} from 'vux'
+    import vue from 'vue'
     import Service from 'service/student'
+    import 'filter/sdFilter'
     export default {
         data () {
             return {
-                showPopup:false,
+                menusOptions: [
+                    '编辑资料',
+                    '添加点评'
+                ],
+                sheetModel: false,
+                showPopup: false,
                 name: '',
                 classId: '',
-                items: []
+                items: [],
+                currentItem: {},
             }
         },
         mountes(){
             this.reloadData();
         },
         methods: {
+            onClick: function (item) {
+                this.currentItem = item;
+                this.sheetModel = true;
+            },
+            clickMenu(val) {
+                if (val == '0') {
+
+                    this.$router.push({
+                        name: 'Addstudentinfo',
+                        params: {id: this.classId, studentid: this.currentItem.id}
+                    });
+                }
+                else if (val == '1') {
+                    this.$router.push({
+                        name: 'Studentinfo'
+                    });
+                }
+                else {
+                    return;
+                }
+            },
             reloadData: function () {
                 this.name = this.$route.params.name;
                 this.classId = this.$route.params.id;
@@ -80,9 +113,6 @@
                 });
                 this.reloadView();
             },
-            clickOntheItem(item){
-                this.$router.push({name: 'Studentinfo', params: {id: item.name}});
-            },
             reloadView(){
                 var items = [];
                 var that = this;
@@ -92,7 +122,9 @@
                             let Obj = {
                                 name: item.firstname + item.lastname,
                                 number: '12',
-                                icon: require('../../assets/Student.png')
+                                icon: require('../../assets/Student.png'),
+                                moment: item.moment,
+                                id: item.id
                             };
                             items.push(Obj);
                         })
@@ -101,13 +133,14 @@
                 });
             },
             clickOntheAdd(){
-                this.$router.push({name: 'Addstudentinfo', params: {id: this.classId}});
+                this.$router.push({name: 'Addstudentinfo', params: {id: this.classId, studentid: '0'}});
             }
         },
         components: {
             Cell,
             Group,
             XButton,
+            Actionsheet
         }
     }
 </script>

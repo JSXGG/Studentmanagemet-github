@@ -16,6 +16,7 @@ LoginService.Login = (model)=> {
                 text: '登录成功'
             })
             SessionStorge.setUserToken(response.data.usertoken);
+            SessionStorge.setUserInfo(response.data.userInfo);
             return '1';
         }
         else {

@@ -28,6 +28,7 @@ const webpackConfig = {
         //模块别名定义，方便后续直接引用别名，无须多写长长的地址
         alias: {
             'vue$': 'vue/dist/vue.common.js',
+            'filter':path.resolve(__dirname, '../src/filter'),
             'src': path.resolve(__dirname, '../src'),
             'assets': path.resolve(__dirname, '../src/assets'),
             'components': path.resolve(__dirname, '../src/components'),

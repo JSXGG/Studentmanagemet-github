@@ -1,8 +1,8 @@
 <template>
     <div class="setupthe">
         <group>
-            <cell :inline-desc="userName" :value="address" style="height:60px">
-                <img class="img" slot="icon" style="display:block;float:right" :src="HeadImage">
+            <cell :inline-desc="nickname" :value="address" style="height:60px">
+                <img class="img" slot="icon" style="display:block;float:right" :src="headimgurl">
             </cell>
 
             <cell class="cellId" style="height: 40px" v-for="(item,index) in items" :value="item.value"
@@ -44,19 +44,28 @@
 <script>
     import {Cell, Group} from 'vux'
     import Service from 'service/user'
+    import sessionstorge from 'service/sdSessionStorge'
     export default {
         data () {
             return {
                 items: [
-                    {name: '绑定学校', icon:require('../../assets/Binding.png'), value: ''},
-                    {name: '教师管理', icon:require('../../assets/Teachersmanagement.png'), value: ''},
+                    {name: '绑定学校', icon: require('../../assets/Binding.png'), value: ''},
+                    {name: '教师管理', icon: require('../../assets/Teachersmanagement.png'), value: ''},
                 ],
-                HeadImage: require('../../assets/Headteachers.png'),
-                userName: 'weng',
-                address: '广东广州'
+                userInfo: sessionstorge.getUserInfo()
             }
         },
-
+        computed: {
+            nickname(){
+                return this.userInfo.nickname ? this.userInfo.nickname : ''
+            },
+            headimgurl(){
+                return this.userInfo.headimgurl ? this.userInfo.headimgurl : require('../../assets/Headteachers.png')
+            },
+            address(){
+                return this.userInfo.province ? this.userInfo.province : '' + this.userInfo.city ? this.userInfo.city : ''
+            }
+        },
         methods: {
             reloadData: function () {
                 this.$store.commit('COMM_CONF', {
@@ -83,12 +92,10 @@
                 switch (index) {
                     case 0: {
 
-                        if (this.items[0].value=='已绑定')
-                        {
-                            this.$router.push({name: 'msg',params:{state:'已绑定',Bindingschool:'广州风萧萧'}});
+                        if (this.items[0].value == '已绑定') {
+                            this.$router.push({name: 'msg', params: {state: '已绑定', Bindingschool: '广州风萧萧'}});
 
-                        }else
-                        {
+                        } else {
                             this.$router.push({name: 'Bindingschool'});
 
                         }
@@ -97,7 +104,7 @@
                         break;
                     case 1: {
 
-                        this.$router.push({name:'TeachersManagement'});
+                        this.$router.push({name: 'TeachersManagement'});
 
                     }
                         break;
@@ -105,7 +112,7 @@
                 }
             }
         },
-         components: {
+        components: {
             Group,
             Cell
         }

@@ -31,7 +31,6 @@
                 }
             },
             weixinLogin(code){
-
                 var that = this;
                 let model = {
                     code: code,
