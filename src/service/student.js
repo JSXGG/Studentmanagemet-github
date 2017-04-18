@@ -18,4 +18,8 @@ Service.addstudent = (model)=> {
 Service.updatastudent = (model)=> {
     return Api.fetchDataByToken('/api/updatastudent', 'post', model);
 }
+/*删除学生*/
+Service.delstudent = (model)=> {
+    return Api.fetchDataByToken('/api/delstudent', 'post', model);
+}
 export default Service;

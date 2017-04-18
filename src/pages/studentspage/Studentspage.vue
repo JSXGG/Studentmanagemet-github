@@ -66,8 +66,9 @@
         data () {
             return {
                 menusOptions: [
-                    '编辑资料',
-                    '添加点评'
+                    {label: '点评', type: 'primary', value: '0'},
+                    {label: '编辑', type: 'primary', value: '1'},
+                    {label: '删除', type: 'warn', value: '2'}
                 ],
                 sheetModel: false,
                 showPopup: false,
@@ -87,20 +88,42 @@
             },
             clickMenu(val) {
                 if (val == '0') {
-
+                    this.$router.push({
+                        name: 'Studentinfo',
+                        params:{id: this.classId, studentid: this.currentItem.id}
+                    });
+                }
+                else if (val == '1') {
                     this.$router.push({
                         name: 'Addstudentinfo',
                         params: {id: this.classId, studentid: this.currentItem.id}
                     });
                 }
-                else if (val == '1') {
-                    this.$router.push({
-                        name: 'Studentinfo'
-                    });
+                else if (val == '2') {
+                    this.delstudent();
                 }
                 else {
                     return;
                 }
+            },
+            delstudent: function () {
+                var that = this;
+                let model = {
+                    classid: this.classId,
+                    studentid: this.currentItem.id
+                }
+                this.$vux.loading.show({
+                    text: '正在删除'
+                });
+                Service.delstudent(model).then(function (response) {
+                    if (response.data && response.data.result == 1) {
+                        that.$vux.loading.hide();
+                        that.$vux.toast.show({
+                            text: '删除成功'
+                        })
+                        that.reloadView();
+                    }
+                });
             },
             reloadData: function () {
                 this.name = this.$route.params.name;

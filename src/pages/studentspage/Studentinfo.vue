@@ -86,12 +86,14 @@
         background-color: @theme-color;
         font-size: 1rem;
     }
+
     .studentinfo .block .title {
         margin-left: 5px;
         font-size: 0.9rem;
         color: @stress-color;
     }
-    .studentinfo .addbtn{
+
+    .studentinfo .addbtn {
         position: fixed;
         opacity: 0.5;
         width: 35%;
@@ -100,17 +102,12 @@
     }
 </style>
 <script>
+    import Service from 'service/student'
     import {XButton, Flexbox, FlexboxItem, Divider} from 'vux'
     export default {
         data () {
             return {
-                baseinfo: {
-                    name: '李灵芝',
-                    gender: '女',
-                    birthday: '1993-06-17',
-                    class: '一年级一班',
-                    hobby: '吃东西'
-                },
+                baseinfo: {},
                 items: [
                     {
                         btime: '2017-01-03',
@@ -169,9 +166,24 @@
                     isHeader: true,
                     isFooter: false,
                 });
+                this.studentid = this.$route.params.studentid ? this.$route.params.studentid : '';
+                this.classid = this.$route.params.classid ? this.$route.params.classid : '';
+                this.getStudentInfo();
+            },
+            getStudentInfo(){
+                Service.getstudentinfo(this.studentid).then(function (response) {
+                    if (response.data && response.data.data) {
+                        let responseData = response.data.data;
+                        that.reloadbaseInfo(responseData);
+                    }
+                });
+            },
+            /*刷新基本信息*/
+            reloadbaseInfo(data){
+                this.baseinfo = data;
             },
             clickOntheAddBtn(){
-                this.$router.push({name: 'Commentontheinput',params: { id: '1',name:this.$route.params.id}});
+                this.$router.push({name: 'Commentontheinput', params: {id: '1', name: this.$route.params.id}});
             }
         },
         components: {
