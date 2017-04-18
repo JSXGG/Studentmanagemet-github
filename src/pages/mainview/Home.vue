@@ -1,44 +1,25 @@
 <template>
-    <div style="padding: 15px;">
+    <div>
 
-        <button-tab>
-            <button-tab-item :value="value" @on-item-click="consoleIndex(0)" selected>考勤</button-tab-item>
-            <button-tab-item @on-item-click="consoleIndex(1)">考勤记录</button-tab-item>
-        </button-tab>
-        <div v-if="value==0" style="margin-top: 10px;">
-
-            <divider>学生签到</divider>
-            <group>
-                <cell class="cellId" style="height: 30px" v-for="(item,index) in items"
-                      :title="item.name" @click.native="onClick(index)"
-                      is-link>
-
-                    <!--<img v-if="item.value==0" slot="icon" width="25" style="display:block;margin-right:15px;"-->
-                         <!--:src="icon0">-->
-                    <!--<img v-else slot="icon" width="25" style="display:block;margin-right:15px;" :src="icon1">-->
-                    <img  v-if="item.value==0"   width="25" height="25" style="margin-right: 10px;":src="icon3">
-                    <img v-else  width="25" height="25" style="margin-right: 10px;":src="icon4">
-
-                    <!--<img  v-if="item.record==0"  width="25" height="25" style="margin-right: 10px;":src="icon5">-->
-                    <!--<img  v-else   width="25" height="25" style="margin-right: 10px;":src="icon6">-->
+        <tab :animate="true">
+            <tab-item  @on-item-click="consoleIndex(0)" selected>考勤</tab-item>
+            <tab-item  @on-item-click="consoleIndex(1)"  >考勤记录</tab-item>
+        </tab>
+       <div v-if="value==0">
 
 
-                </cell>
-            </group>
-            <div style="margin-left: 10px;margin-right:10px;margin-bottom: 60px;margin-top: 20px">
+               <cell   v-for="(item,index) in items "  @click.native="onClick(index)"  :title=item.name   is-link>
+                   <img slot="icon" width="30" style="display:block;margin-right:5px;" :src="item.icon">
+               </cell>
 
-                <actionsheet v-model="show5" :menus="menus5" @on-click-menu="click" @on-click-menu-delete="onDelete"
-                             show-cancel>
-                </actionsheet>
-                <!--<x-button class="btn" @click.native="submit" type="primary">上传数据</x-button>-->
-
-            </div>
-
-        </div>
-
+       </div>
         <div v-else>
 
+            <cell   v-for="(item,index) in items " title=' 2016-3-8 12:35:48 ' @click.native="AttendanceRecords(index)" is-link value="早托">
+                <img slot="icon"  width="30" style="display:block;margin-right:5px;" :src="icon0" >
+            </cell>
         </div>
+
     </div>
 </template>
 
@@ -61,63 +42,22 @@
         Popup,
         Actionsheet,
         Toast,
-        XButton
+        XButton,Tab, TabItem
     } from 'vux'
     export default {
         data () {
             return {
                 items: [
-                    {name: '张学友', value: '0', record: '0'},
-                    {name: '郭富城', value: '0', record: '0'},
-                    {name: '刘德华', value: '0', record: '0'},
-                    {name: '黎明',   value: '0', record: '0'},
-                    {name: '黄家强', value: '0', record: '0'},
-                    {name: '黄彦祖', value: '0', record: '0'},
-                    {name: '张家辉', value: '0', record: '0'},
-                    {name: '吴孟达', value: '0', record: '0'},
-                    {name: '周星驰', value: '0', record: '0'},
-                    {name: '黄嘉良', value: '0', record: '0'},
-                    {name: '黄渤',  value: '0',  record: '0'},
-                    {name: '张晓军', value: '0', record: '0'},
-                    {name: '陈奕迅', value: '0', record: '0'},
+                    {name: '早托', value: '0',icon: require('../../assets/early.png')},
+                    {name: '午托', value: '0',icon: require('../../assets/Atnoon.png')},
+                    {name: '晚托', value: '0',icon: require('../../assets/evening.png')},
                 ],
                 value: '0',
                 show5: false,
                 a: '',
-                icon0: require('../../assets/q_0.png'),
-                icon1: require('../../assets/q_1.png'),
-                icon3: require('../../assets/bd_0.png'),
-                icon4: require('../../assets/bd_1.png'),
-                icon5: require('../../assets/L_0.png'),
-                icon6: require('../../assets/L_1.png'),
+                icon0: require('../../assets/Signrecord.png'),
+                icon1: require('../../assets/time.png'),
 
-                menus5: [
-//                    {
-//                        label: '出勤状况<br/><span style="color:#666;font-size:12px;">请选择出勤情况</span>',
-//                        type: 'info'
-//                    },
-                    {
-                        label: '进入学校',
-                        type: 'primary',
-                        value: '1'
-                    },
-                    {
-                        label: '离开机构',
-                        type: 'primary',
-                        value: '3'
-                    },
-                    {
-                        label: '进入学校',
-                        type: 'warn',
-                        value: '2'
-
-                    },
-
-                    {
-                        label: '离开机构',
-                        type: 'warn',
-                        value: '4'
-                    }]
 
             }
         },
@@ -158,65 +98,23 @@
             },
             onClick (Index) {
                 console.log(Index);
-                let self = this;
-                self.show5 = true;
-                this.a = Index;
+
+                this.$router.push({name: 'classlist', params: {type: '已绑定'}});
+
+
+            },  AttendanceRecords (Index) {
+                console.log(Index);
+
+                this.$router.push({name: 'Attendancerecords', params: {Id: '5'}});
 
 
             },
-            onDelete(){
-                var date = new Date();
-                var seperator1 = "-";
-                var seperator2 = ":";
-                var month = date.getMonth() + 1;
-                var strDate = date.getDate();
-                if (month >= 1 && month <= 9) {
-                    month = "0" + month;
-                }
-                if (strDate >= 0 && strDate <= 9) {
-                    strDate = "0" + strDate;
-                }
-                var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
-                    + " " + date.getHours() + seperator2 + date.getMinutes()
-                    + seperator2 + date.getSeconds();
-                return currentdate;
-            },
-            click (key) {
-                console.log( this.onDelete());
 
-
-
-                let self = this;
-                self.show5 = false;
-                let Name = this.items[this.a];
-                let Value = this.items[this.a];
-                let Record = this.items[this.a];
-
-                if (key == '1') {
-                    let value = {name: Name.name, value: '1', record: Record.record}
-                    this.items.splice(this.a, 1, value);
-                } else if (key == '2') {
-                    let value = {name: Name.name, value: '0', record: Record.record};
-                    this.items.splice(this.a, 1, value);
-                } else if (key == '3') {
-                    let value = {name: Name.name, value: Value.value, record: '1'};
-                    this.items.splice(this.a, 1, value);
-                } else if (key == '4'){
-                    let value = {name: Name.name, value:Value.value, record: '0'};
-                    this.items.splice(this.a, 1, value);
-                }
-
-
-            }, submit()
-            {
-
-
-            }
         },
         components: {
             ButtonTab,
             ButtonTabItem,
-            Divider, Checklist, Group, Cell, Checker, CheckerItem, Popup, Actionsheet, Toast, XButton
+            Divider, Checklist, Group, Cell, Checker, CheckerItem, Popup, Actionsheet, Toast, XButton,Tab, TabItem
 
         }
 
