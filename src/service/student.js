@@ -22,4 +22,12 @@ Service.updatastudent = (model)=> {
 Service.delstudent = (model)=> {
     return Api.fetchDataByToken('/api/delstudent', 'post', model);
 }
+/*添加学生评论*/
+Service.addstudentcomment = (model)=> {
+    return Api.fetchDataByToken('/api/addstudentcomment', 'post', model);
+}
+/*根据id获取学生评论列表*/
+Service.getcommentbystudentid = (studentid)=> {
+    return Api.fetchDataByToken('/api/getcommentbystudentid', 'post', {studentid});
+}
 export default Service;

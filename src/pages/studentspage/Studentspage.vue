@@ -90,13 +90,13 @@
                 if (val == '0') {
                     this.$router.push({
                         name: 'Studentinfo',
-                        params:{id: this.classId, studentid: this.currentItem.id}
+                        params:{classid: this.classId, studentid: this.currentItem.id}
                     });
                 }
                 else if (val == '1') {
                     this.$router.push({
                         name: 'Addstudentinfo',
-                        params: {id: this.classId, studentid: this.currentItem.id}
+                        params: {classid: this.classId, studentid: this.currentItem.id}
                     });
                 }
                 else if (val == '2') {
@@ -156,7 +156,7 @@
                 });
             },
             clickOntheAdd(){
-                this.$router.push({name: 'Addstudentinfo', params: {id: this.classId, studentid: '0'}});
+                this.$router.push({name: 'Addstudentinfo', params: {classid: this.classId, studentid: '0'}});
             }
         },
         components: {
