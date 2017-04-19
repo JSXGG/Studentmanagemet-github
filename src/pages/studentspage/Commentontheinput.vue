@@ -37,6 +37,7 @@
                 startDate: '',
                 endDate: '',
                 week: '',
+                recordid: '',
                 items: [],
                 model: {
                     btime: '',
@@ -61,18 +62,35 @@
                     isFooter: false,
                 });
                 this.model.studentid = this.$route.params.studentid;
+                this.recordid = this.$route.params.recordid;
+                if (this.recordid) {
+                    this.getcommentbyrecordid(this.recordid);
+                }
             },
             clickOntheSave() {
                 this.$vux.loading.show({
                     text: '保存中...'
                 });
                 var that = this;
+                if (this.recordid && this.recordid != 0) {
+                    this.model.recordid = this.recordid;
+                }
                 Service.addstudentcomment(this.model).then(function (response) {
                     if (response.data && response.data.result == '1') {
                         that.$vux.loading.hide();
                         that.$vux.toast.show({
                             text: '保存成功'
                         })
+                    }
+                });
+            },
+            getcommentbyrecordid(recordid){
+                var that = this;
+                Service.getcommentbyrecordid(recordid).then(function (response) {
+                    if (response.data && response.data.data) {
+                        for (let key in that.model) {
+                            that.model[key] = response.data.data[key]
+                        }
                     }
                 });
             },

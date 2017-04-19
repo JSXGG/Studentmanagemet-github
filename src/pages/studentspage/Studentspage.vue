@@ -74,6 +74,7 @@
                 showPopup: false,
                 name: '',
                 classId: '',
+                show:false,
                 items: [],
                 currentItem: {},
             }
@@ -106,24 +107,40 @@
                     return;
                 }
             },
+            onHide () {
+                console.log('on hide')
+            },
+            onShow () {
+                console.log('on show')
+            },
             delstudent: function () {
+                this.show = true;
                 var that = this;
                 let model = {
                     classid: this.classId,
                     studentid: this.currentItem.id
                 }
-                this.$vux.loading.show({
-                    text: '正在删除'
-                });
-                Service.delstudent(model).then(function (response) {
-                    if (response.data && response.data.result == 1) {
-                        that.$vux.loading.hide();
-                        that.$vux.toast.show({
-                            text: '删除成功'
-                        })
-                        that.reloadView();
+                this.$vux.alert.show({
+                    title: '请注意',
+                    content: '删除之后学生之后资料无法恢复，是否确定？',
+                    onHide () {
+                        that.$vux.loading.show({
+                            text: '正在删除'
+                        });
+                        Service.delstudent(model).then(function (response) {
+                            if (response.data && response.data.result == 1) {
+                                that.$vux.loading.hide();
+                                that.$vux.toast.show({
+                                    text: '删除成功'
+                                })
+                                that.reloadView();
+                            }
+                        });
                     }
-                });
+                })
+                setTimeout(() => {
+                    this.$vux.alert.hide()
+                }, 3000)
             },
             reloadData: function () {
                 this.name = this.$route.params.name;

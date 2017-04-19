@@ -39,9 +39,9 @@ const routes = [
 
             {path: 'setupthe', component: Setupthe, meta: {keepAlive: true}, name: 'Setupthe'},
             {path: 'studentspage/:id/:name', component: Studentspage, meta: {keepAlive: true}, name: 'Studentspage'},
-            {path: 'studentspage/addstudent/:classid/:studentid', component: Addstudentinfo,meta: {keepAlive: false},name: 'Addstudentinfo'},
+            {path: 'studentspage/addstudent/:classid/:studentid/', component: Addstudentinfo,meta: {keepAlive: false},name: 'Addstudentinfo'},
             {path: 'studentinfo/:classid/:studentid', component: Studentinfo, meta: {keepAlive: true}, name: 'Studentinfo'},
-            {path: 'commentontheinput/:classid/:studentid/:name', component: Commentontheinput, meta: {keepAlive: true}, name: 'Commentontheinput'},
+            {path: 'commentontheinput/:classid/:studentid/:name/:recordid', component: Commentontheinput, meta: {keepAlive: true}, name: 'Commentontheinput'},
             {path: 'phoneverification/:id/:name', component: Phoneverification, meta: {keepAlive: true}, name: 'Phoneverification'},
             { path: 'login', component: Login, name: 'login'}
         ]

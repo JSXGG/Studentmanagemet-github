@@ -2,7 +2,7 @@ import Vue from 'vue'
 import router from './router/router'
 import store from './store/store'//使用vuex。
 import mixins from './mixins/page.mixins'
-
+import  { AlertPlugin } from 'vux'
 const FastClick = require('fastclick')
 FastClick.attach(document.body)
 const app = new Vue({
@@ -19,6 +19,7 @@ Vue.mixin({
 });
 import  { LoadingPlugin ,ToastPlugin} from 'vux'
 Vue.use(LoadingPlugin);
+Vue.use(AlertPlugin)
 Vue.use(ToastPlugin);
 
 window.myVue = Vue;

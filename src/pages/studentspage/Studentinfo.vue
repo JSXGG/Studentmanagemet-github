@@ -1,7 +1,8 @@
 <template>
     <div class="studentinfo">
+        <div v-if="items.length == 0" style="text-align: center;color: #00bcd4;margin-top: 100px">请添加点评</div>
         <div class="pagebody">
-            <div class="block" v-for="item in items">
+            <div class="block" v-for="item in items" @click="clicOntheblock(item)">
                 <div class="formteach">
                     {{item.btime}}到{{item.etime}} 第{{item.week}}周<br>{{item.teachername}}的短评
                 </div>
@@ -81,12 +82,14 @@
 </style>
 <script>
     import Service from 'service/student'
+    import sessionstorge from 'service/sdSessionStorge'
     import {XButton, Flexbox, FlexboxItem, Divider} from 'vux'
     export default {
         data () {
             return {
                 baseinfo: {},
                 nicname: '',
+                userInfo: sessionstorge.getUserInfo(),
                 items: []
             }
         },
@@ -97,6 +100,19 @@
                 this.setHeaderViewTitle('');
                 this.getStudentInfo();
                 this.getcommentbystudentid();
+            },
+            //点击修改点评。
+            clicOntheblock(item){
+                if (item.teacherid == this.userInfo.id) {
+                    this.$router.push({
+                        name: 'Commentontheinput',
+                        params: {
+                            classid: this.classid,
+                            studentid: this.studentid,
+                            name: this.nicname,
+                            recordid:item.id}
+                    });
+                }
             },
             setHeaderViewTitle(title){
                 this.$store.commit('COMM_CONF', {
@@ -127,7 +143,6 @@
             getcommentbystudentid(){
                 var that = this;
                 Service.getcommentbystudentid(this.studentid).then(function (response) {
-                    console.log('getcommentbystudentid===', response);
                     if (response.data && response.data.data) {
                         that.items = response.data.data;
                     }
@@ -136,7 +151,7 @@
             clickOntheAddBtn(){
                 this.$router.push({
                     name: 'Commentontheinput',
-                    params: {classid: this.classid, studentid: this.studentid, name: this.nicname}
+                    params: {classid: this.classid, studentid: this.studentid, name: this.nicname,recordid:'0'}
                 });
             }
         },

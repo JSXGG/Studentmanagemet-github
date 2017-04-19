@@ -30,4 +30,9 @@ Service.addstudentcomment = (model)=> {
 Service.getcommentbystudentid = (studentid)=> {
     return Api.fetchDataByToken('/api/getcommentbystudentid', 'post', {studentid});
 }
+/*根据记录id获取评论*/
+Service.getcommentbyrecordid = (recordid)=>{
+    return Api.fetchDataByToken('/api/getcommentbyrecordid', 'post', {recordid});
+
+}
 export default Service;
