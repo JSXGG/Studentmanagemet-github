@@ -29,8 +29,13 @@ module.exports = {
     assetsPublicPath: '/',
       proxyTable: {
           '/api': {
+<<<<<<< HEAD
               target: 'http://educ.xggserve.com',//生产环境
               // target:'http://192.168.199.235:8888/Studentmanageserve/public/',//测试环境
+=======
+              // target: 'http://educ.xggserve.com',//生产环境
+              target:'http://192.168.9.209:8888/Studentmanageserve/public/',//测试环境
+>>>>>>> 9aa3f52a56edde1052e733459424c5f6bd51d7eb
               changeOrigin: true
           }
       },

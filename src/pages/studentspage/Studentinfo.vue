@@ -1,44 +1,22 @@
 <template>
     <div class="studentinfo">
-        <div class="header">
-            <div style="display: flex;" class="title">
-                <div>姓名：</div>
-                <div style="margin-left: 10px">{{baseinfo.name}}</div>
-            </div>
-            <div style="display: flex;" class="title">
-                <div>性别：</div>
-                <div style="margin-left: 10px">{{baseinfo.gender}}</div>
-            </div>
-            <div style="display: flex;" class="title">
-                <div>生日：</div>
-                <div style="margin-left: 10px">{{baseinfo.birthday}}</div>
-            </div>
-            <div style="display: flex;" class="title">
-                <div>班级：</div>
-                <div style="margin-left: 10px">{{baseinfo.class}}</div>
-            </div>
-            <div style="display: flex;" class="title">
-                <div>兴趣爱好：</div>
-                <div style="margin-left: 10px">{{baseinfo.hobby}}</div>
-            </div>
-        </div>
         <div class="pagebody">
             <div class="block" v-for="item in items">
                 <div class="formteach">
-                    {{item.btime}}到{{item.etime}} 第{{item.week}}周<br>{{item.teach}}的短评
+                    {{item.btime}}到{{item.etime}} 第{{item.week}}周<br>{{item.teachername}}的短评
                 </div>
                 <h4 class="title">本周总结 （学习&生活）</h4>
                 <p style="padding: 10px">
-                    {{item.thisWeekSummary}}
+                    {{item.weekworksummary}}
                 </p>
                 <h4 class="title">下周计划</h4>
                 <p style="padding: 10px">
-                    {{item.nextWeekSummary}}
+                    {{item.nextworkplan}}
 
                 </p>
                 <h4 class="title">问题反思与 改进方案</h4>
                 <p style="padding: 10px">
-                    {{item.nextWeekPlan}}
+                    {{item.problemsreflect}}
                 </p>
             </div>
         </div>
@@ -86,12 +64,14 @@
         background-color: @theme-color;
         font-size: 1rem;
     }
+
     .studentinfo .block .title {
         margin-left: 5px;
         font-size: 0.9rem;
         color: @stress-color;
     }
-    .studentinfo .addbtn{
+
+    .studentinfo .addbtn {
         position: fixed;
         opacity: 0.5;
         width: 35%;
@@ -100,69 +80,25 @@
     }
 </style>
 <script>
+    import Service from 'service/student'
     import {XButton, Flexbox, FlexboxItem, Divider} from 'vux'
     export default {
         data () {
             return {
-                baseinfo: {
-                    name: '李灵芝',
-                    gender: '女',
-                    birthday: '1993-06-17',
-                    class: '一年级一班',
-                    hobby: '吃东西'
-                },
-                items: [
-                    {
-                        btime: '2017-01-03',
-                        etime: '2017-01-08',
-                        week: '3',
-                        teach: '李老师',
-                        thisWeekSummary: '持之以恒，迎难而上的勇气，不断改进学习方法，加强知识的记忆，多练多问，' +
-                        '我相信你一定会取得更好的成绩。为人谨慎，心性坦荡。沉稳深刻、思维严密。全神贯注，' +
-                        '书写工工整整。努力探索，你一定能取得更大的成功。',
-                        nextWeekSummary: '持之以恒，迎难而上的勇气，不断改进学习方法，加强知识的记忆，多练多问，' +
-                        '我相信你一定会取得更好的成绩。为人谨慎，心性坦荡。沉稳深刻、思维严密。全神贯注，' +
-                        '书写工工整整。努力探索，你一定能取得更大的成功。',
-                        nextWeekPlan: '持之以恒，迎难而上的勇气，不断改进学习方法，加强知识的记忆，多练多问，' +
-                        '我相信你一定会取得更好的成绩。为人谨慎，心性坦荡。沉稳深刻、思维严密。全神贯注，' +
-                        '书写工工整整。努力探索，你一定能取得更大的成功。'
-                    },
-                    {
-                        btime: '2017-01-03',
-                        etime: '2017-01-08',
-                        week: '3',
-                        teach: '刘老师',
-                        thisWeekSummary: '持之以恒，迎难而上的勇气，不断改进学习方法，加强知识的记忆，多练多问，' +
-                        '我相信你一定会取得更好的成绩。为人谨慎，心性坦荡。沉稳深刻、思维严密。全神贯注，' +
-                        '书写工工整整。努力探索，你一定能取得更大的成功。',
-                        nextWeekSummary: '持之以恒，迎难而上的勇气，不断改进学习方法，加强知识的记忆，多练多问，' +
-                        '我相信你一定会取得更好的成绩。为人谨慎，心性坦荡。沉稳深刻、思维严密。全神贯注，' +
-                        '书写工工整整。努力探索，你一定能取得更大的成功。',
-                        nextWeekPlan: '持之以恒，迎难而上的勇气，不断改进学习方法，加强知识的记忆，多练多问，' +
-                        '我相信你一定会取得更好的成绩。为人谨慎，心性坦荡。沉稳深刻、思维严密。全神贯注，' +
-                        '书写工工整整。努力探索，你一定能取得更大的成功。'
-                    },
-                    {
-                        btime: '2017-01-03',
-                        etime: '2017-01-08',
-                        week: '3',
-                        teach: '黄老师',
-                        thisWeekSummary: '持之以恒，迎难而上的勇气，不断改进学习方法，加强知识的记忆，多练多问，' +
-                        '我相信你一定会取得更好的成绩。为人谨慎，心性坦荡。沉稳深刻、思维严密。全神贯注，' +
-                        '书写工工整整。努力探索，你一定能取得更大的成功。',
-                        nextWeekSummary: '持之以恒，迎难而上的勇气，不断改进学习方法，加强知识的记忆，多练多问，' +
-                        '我相信你一定会取得更好的成绩。为人谨慎，心性坦荡。沉稳深刻、思维严密。全神贯注，' +
-                        '书写工工整整。努力探索，你一定能取得更大的成功。',
-                        nextWeekPlan: '持之以恒，迎难而上的勇气，不断改进学习方法，加强知识的记忆，多练多问，' +
-                        '我相信你一定会取得更好的成绩。为人谨慎，心性坦荡。沉稳深刻、思维严密。全神贯注，' +
-                        '书写工工整整。努力探索，你一定能取得更大的成功。'
-                    }
-                ]
+                baseinfo: {},
+                nicname: '',
+                items: []
             }
         },
         methods: {
             reloadData: function () {
-                var title = this.$route.params.id;
+                this.studentid = this.$route.params.studentid ? this.$route.params.studentid : '';
+                this.classid = this.$route.params.classid ? this.$route.params.classid : '';
+                this.setHeaderViewTitle('');
+                this.getStudentInfo();
+                this.getcommentbystudentid();
+            },
+            setHeaderViewTitle(title){
                 this.$store.commit('COMM_CONF', {
                     isBack: true,
                     title: title,
@@ -170,8 +106,38 @@
                     isFooter: false,
                 });
             },
+            getStudentInfo(){
+                var that = this;
+                Service.getstudentinfo(this.studentid).then(function (response) {
+                    if (response.data && response.data.data) {
+                        let responseData = response.data.data;
+                        that.reloadbaseInfo(responseData);
+                    }
+                });
+            },
+            /*刷新基本信息*/
+            reloadbaseInfo(data){
+                this.baseinfo = data;
+                if (this.baseinfo && this.baseinfo.firstname) {
+                    this.nicname = this.baseinfo.firstname + this.baseinfo.lastname;
+                    this.setHeaderViewTitle(this.nicname);
+                }
+            },
+            /*获取评论列表*/
+            getcommentbystudentid(){
+                var that = this;
+                Service.getcommentbystudentid(this.studentid).then(function (response) {
+                    console.log('getcommentbystudentid===', response);
+                    if (response.data && response.data.data) {
+                        that.items = response.data.data;
+                    }
+                });
+            },
             clickOntheAddBtn(){
-                this.$router.push({name: 'Commentontheinput',params: { id: '1',name:this.$route.params.id}});
+                this.$router.push({
+                    name: 'Commentontheinput',
+                    params: {classid: this.classid, studentid: this.studentid, name: this.nicname}
+                });
             }
         },
         components: {

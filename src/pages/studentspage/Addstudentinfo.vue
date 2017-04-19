@@ -102,7 +102,7 @@
             },
             /*获取学生信息*/
             getStudentInfo(){
-                if (this.studentid&&this.studentid.length>0) {
+                if (this.studentid&&this.studentid!=0) {
                     var that = this;
                     Service.getstudentinfo(this.studentid).then(function (response) {
                         if (response.data && response.data.data) {
@@ -146,10 +146,10 @@
                     this.items.forEach(function (item) {
                         Model[item.key] = item.value;
                     });
-                    let classid = this.$route.params.id;
+                    let classid = this.$route.params.classid;
                     Model['classid'] = classid;
                     Model['moment'] = this.moment;
-                    if (this.studentid.length == 0) {
+                    if (this.studentid == '0') {
                         this.$vux.loading.show({
                             text: '正在添加...'
                         });
