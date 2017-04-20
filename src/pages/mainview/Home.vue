@@ -16,7 +16,7 @@
         <div v-else>
 
             <cell   v-for="(item,index) in items " title=' 2016-3-8 12:35:48 ' @click.native="AttendanceRecords(index)" is-link value="早托">
-                <img slot="icon"  width="30" style="display:block;margin-right:5px;" :src="icon0" >
+                <img slot="icon"  width="25" style="display:block;margin-right:5px;" :src="icon0" >
             </cell>
         </div>
 
@@ -48,15 +48,14 @@
         data () {
             return {
                 items: [
-                    {name: '早托', value: '0',icon: require('../../assets/early.png')},
-                    {name: '午托', value: '0',icon: require('../../assets/Atnoon.png')},
-                    {name: '晚托', value: '0',icon: require('../../assets/evening.png')},
+                    {name: ' 早托', value: '0',icon: require('../../assets/hz.png')},
+                    {name: ' 午托', value: '0',icon: require('../../assets/hz.png')},
+                    {name: ' 全托', value: '0',icon: require('../../assets/hz.png')},
                 ],
                 value: '0',
                 show5: false,
                 a: '',
-                icon0: require('../../assets/Signrecord.png'),
-                icon1: require('../../assets/time.png'),
+                icon0: require('../../assets/ls.png'),
 
 
             }

@@ -1,14 +1,15 @@
 <template>
     <div>
-         <cell  style="height: 30px" v-for="(item,index) in items "  @click.native="onClick(index)"  :title=item.name is-link>
+         <cell  style="height: 25px" v-for="(item,index) in items "  @click.native="onClick(index)"  :title=item.name is-link>
+
+             <img slot="icon" width="30" style="display:block;margin-right:5px;" :src="iconxs">
 
 
+             <img  v-if="item.value==0"   width="25" height="25" style="margin-right: 10px;margin-top: 8px":src="icon1">
+             <img v-else  width="25" height="25" style="margin-right: 10px;margin-top: 8px":src="icon1">
 
-             <img  v-if="item.value==0"   width="30" height="30" style="margin-right: 10px;":src="icon1">
-             <img v-else  width="30" height="30" style="margin-right: 10px;":src="icon1">
-
-             <img  v-if="item.record==0"  width="30" height="30" style="margin-right: 10px;":src="icon2">
-             <img  v-else   width="30" height="30" style="margin-right: 10px;":src="icon3">
+             <img  v-if="item.record==0"  width="25" height="25" style="margin-right: 15px;margin-top: 8px":src="icon2">
+             <img  v-else   width="25" height="25" style="margin-right: 10px;margin-top: 8px":src="icon3">
 
 
          </cell>
@@ -28,14 +29,16 @@
             return{
                 msg:'hello vue',
                 items: [
-                    {name: '张学友', value: '0',icon: require('../../assets/early.png')},
-                    {name: '黄家驹', value: '0',icon: require('../../assets/Atnoon.png')},
-                    {name: '谭咏麟', value: '0',icon: require('../../assets/evening.png')},
+                    {name: '张学友', value: '0',icon: require('../../assets/selected.png')},
+                    {name: '黄家驹', value: '0',icon: require('../../assets/uncheck.png')},
+                    {name: '谭咏麟', value: '0',icon: require('../../assets/uncheck.png')},
                 ],
-                icon0: require('../../assets/Sign_00.png'),
-                icon1: require('../../assets/Sign_01.png'),
-                icon2: require('../../assets/lx_0.png'),
-                icon3: require('../../assets/lx_1.png'),
+                icon0: require('../../assets/uncheck.png'),
+                icon1: require('../../assets/uncheck.png'),
+                icon2: require('../../assets/uncheck.png'),
+                icon3: require('../../assets/selected.png'),
+                iconxs: require('../../assets/students.png'),
+
             }
         },  methods: {
             reloadData: function () {
