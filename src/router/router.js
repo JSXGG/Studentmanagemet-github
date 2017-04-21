@@ -9,7 +9,7 @@ const App = resolve => require(['../App'], resolve)
 const Home = resolve => require(['../pages/mainview/Home'], resolve)
 
 const Attendancerecords = resolve => require(['../pages/mainview/Attendancerecords'], resolve)
-const Classlist = resolve => require(['../pages/mainview/Classlist'], resolve)
+const Mandatoryattendance = resolve => require(['../pages/mainview/Mandatoryattendance'], resolve)
 
 const Manage = resolve => require(['../pages/mainview/Manage'], resolve)
 const Setupthe = resolve => require(['../pages/mainview/Setupthe'], resolve)
@@ -34,7 +34,9 @@ const routes = [
         //配置子路由 meta: {keepAlive: true}
         children: [
             {path: 'home', component: Home, meta: {keepAlive: true}, name: 'Home'},
-            {path: 'classlist/:type', component: Classlist, meta: {keepAlive: true}, name: 'classlist'},
+
+            {path: 'Mandatoryattendance/:type', component: Mandatoryattendance, meta: {keepAlive: true}, name: 'Mandatoryattendance'},
+
             {path: 'Attendancerecords/:Id', component: Attendancerecords, meta: {keepAlive: true}, name: 'Attendancerecords'},
 
             {path: 'manage', component: Manage, meta: {keepAlive: true}, name: 'Manage'},

@@ -48,9 +48,8 @@
         data () {
             return {
                 items: [
-                    {name: ' 早托', value: '0',icon: require('../../assets/hz.png')},
                     {name: ' 午托', value: '0',icon: require('../../assets/hz.png')},
-                    {name: ' 全托', value: '0',icon: require('../../assets/hz.png')},
+                    {name: ' 晚托', value: '0',icon: require('../../assets/hz.png')},
                 ],
                 value: '0',
                 show5: false,
@@ -98,13 +97,21 @@
             onClick (Index) {
                 console.log(Index);
 
-                this.$router.push({name: 'classlist', params: {type: '已绑定'}});
+                if (Index==0)
+                {
+                    this.$router.push({name: 'Mandatoryattendance', params: {Id: '1'}});
+
+                }else {
+                    this.$router.push({name: 'Mandatoryattendance', params: {Id: '2'}});
+
+                }
+
 
 
             },  AttendanceRecords (Index) {
                 console.log(Index);
 
-                this.$router.push({name: 'Attendancerecords', params: {Id: '5'}});
+                this.$router.push({name: 'Attendancerecords', params: {Id: '已绑定'}});
 
 
             },
