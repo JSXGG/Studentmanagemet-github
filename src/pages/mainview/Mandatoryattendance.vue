@@ -1,8 +1,19 @@
 <template>
     <div>
         <group style="background: white" v-for="(item,index) in items" is-link>
-            <p style="height: 40px;line-height: 40px;margin-left: 10px">{{item.firstname+item.lastname}}</p>
-            <Checklist v-model="item.value" :options="commonList" @on-change="ChecklistChange(item)"></Checklist>
+            <flexbox>
+                <flexbox-item :span="0.4">
+                    <p style="height: 40px;line-height: 40px;margin-left: 10px">{{item.firstname+item.lastname}}</p>
+                </flexbox-item>
+                <flexbox-item :span="0.3">
+                    <Checklist v-model="item.key1" :options="commonList1">
+                    </Checklist>
+                </flexbox-item>
+                <flexbox-item :span="0.3">
+                    <Checklist v-model="item.key2" :options="commonList2">
+                    </Checklist>
+                </flexbox-item>
+            </flexbox>
         </group>
         <div style="margin-left: 10px;margin-right:10px;margin-top: 20px;margin-bottom: 10px">
             <x-button @click.native="clickOntheEnter" type="primary">保存</x-button>
@@ -14,20 +25,16 @@
 <script>
     import Service from 'service/user'
     import moment from 'moment';
-    import {
-        Checklist,
-        Group,
-        Cell,
-        Toast,
-        XButton
-    } from 'vux'
+    import {Checklist, Group, Cell, Toast, XButton, Flexbox, FlexboxItem} from 'vux'
     export default {
         data () {
             return {
                 moment: '',
-                commonList: [
-                    {key: '1', value: '离开学校'},
-                    {key: '2', value: '进入进入机构'}
+                commonList1: [
+                    {key: '1', value: '离校'},
+                ],
+                commonList2: [
+                    {key: '1', value: '到达'}
                 ],
                 items: []
             }
@@ -46,13 +53,50 @@
                 this.getAccessclass(this.moment);
             },
             clickOntheEnter(){
+                let model = [];
+                let that = this;
+                //1进入机构，2离开学校，3全部签到。'-1'取消签到。
                 this.items.forEach(function (item) {
-                    console.log('item====', item.value)
+                    let signintype = '';
+                    if (item.key1.length > 0 && item.key2.length > 0) {
+                        signintype = '3'
+                    }
+                    else if (item.key1.length > 0) {
+                        signintype = '2'
+                    }
+                    else if (item.key2.length > 0) {
+                        signintype = '1'
+                    }
+                    else {
+                        signintype = '-1';
+                    }
+                    let Obj = {
+                        studentid: item.id,
+                        moment: that.moment,
+                        signintype: signintype
+                    };
+                    model.push(Obj);
                 });
-                console.log('12312312==1==123123');
+                let Data = {
+                    data: JSON.stringify(model)
+                }
+                this.batchstudentsignin(Data);
             },
-            ChecklistChange(item){
-                console.log('item==========', this.items);
+            //签到
+            batchstudentsignin(model){
+                let that = this;
+                this.$vux.loading.show({
+                    text: '正在保存...'
+                });
+                Service.batchstudentsignin(model).then(function (response) {
+                    if (response.data && response.data.result == '1') {
+                        that.$vux.loading.hide();
+                        that.$vux.toast.show({
+                            text: '保存成功'
+                        })
+                    }
+                    console.log(response);
+                });
             },
             getAccessclass(Id){
                 var that = this;
@@ -64,7 +108,8 @@
                     if (response.data && response.data.data) {
                         let array = response.data.data;
                         array.forEach(function (item) {
-                            item['value'] = ['1'];
+                            item['key1'] = [];
+                            item['key2'] = [];
                             items.push(item);
                         });
                         that.$vux.loading.hide();
@@ -80,9 +125,32 @@
                     date: Today,
                     moment: this.moment
                 }
+                var that = this;
                 Service.getsignlistbyclassid(model).then(function (response) {
                     if (response.data && response.data.data) {
-                        console.log('response========================', response);
+                        let array = response.data.data;
+                        array.forEach(function (item1) {
+                            that.items.forEach(function (item2) {
+                                if (item2.id == item1.studentid) {
+                                    let into = item1.intotheorganization ? String(item1.intotheorganization) : '';
+                                    let lev = item1.leavetheschool ? String(item1.leavetheschool) : ''
+                                    if (lev.length > 0 && into.length > 0) {
+                                        item2['key1'] = ['1'];
+                                        item2['key2'] = ['1'];
+                                    }
+                                    else if (lev.length > 0) {
+                                        item2['key1'] = ['1'];
+                                    }
+                                    else if (into.length > 0) {
+                                        item2['key2'] = ['1'];
+                                    }
+                                    else {
+                                        item2['key1'] = [];
+                                        item2['key2'] = [];
+                                    }
+                                }
+                            });
+                        });
                     }
                 });
             }
@@ -92,7 +160,9 @@
             Group,
             Cell,
             Toast,
-            XButton
+            XButton,
+            Flexbox,
+            FlexboxItem
         }
     }
 

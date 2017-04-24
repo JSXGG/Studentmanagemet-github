@@ -7,20 +7,24 @@ UserService.getschoolinfo = (model)=> {
     return Api.fetchDataByToken('/api/getschoolinfo', 'post', model);
 }
 /*获取老师信息*/
-UserService.gettecherinfobyid = (model)=>{
+UserService.gettecherinfobyid = (model)=> {
     return Api.fetchDataByToken('/api/gettecherinfobyid', 'post', model);
 };
 /*绑定学校*/
-UserService.getbindingschool = (model)=>{
+UserService.getbindingschool = (model)=> {
     return Api.fetchDataByToken('/api/bindingschool', 'post', model);
 };
 
 /*获取学生列表*/
-UserService.getstudentlistbymoment = (moment)=>{
-    return Api.fetchDataByToken('/api/getstudentlistbymoment', 'post', {moment:moment});
+UserService.getstudentlistbymoment = (moment)=> {
+    return Api.fetchDataByToken('/api/getstudentlistbymoment', 'post', {moment: moment});
 };
-/*获取签到列表*/
-UserService.getsignlistbyclassid = (model)=>{
+/*获取签到列表  */
+UserService.getsignlistbyclassid = (model)=> {
     return Api.fetchDataByToken('/api/getsignlistbyclassid', 'post', model);
+};
+/*批量签到*/
+UserService.batchstudentsignin = (model)=> {
+    return Api.fetchDataByToken('/api/batchstudentsignin', 'post', model);
 };
 export default UserService;
