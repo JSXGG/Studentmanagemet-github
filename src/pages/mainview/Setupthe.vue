@@ -6,7 +6,7 @@
             </cell>
 
             <cell class="cellId" style="height: 40px" v-for="(item,index) in items" :value="item.value"
-                  :title="item.name" @click.native="onClick(index)"
+                  :title="item.name"
                   is-link>
                 <img slot="icon" width="25" style="display:block;margin-right:15px;" :src="item.icon">
 
@@ -50,7 +50,7 @@
             return {
                 items: [
                     {name: '绑定学校', icon: require('../../assets/Binding.png'), value: ''},
-                    {name: '教师管理', icon: require('../../assets/Teachersmanagement.png'), value: ''},
+//                    {name: '教师管理', icon: require('../../assets/Teachersmanagement.png'), value: ''},
                 ],
                 userInfo: sessionstorge.getUserInfo()
             }
@@ -78,8 +78,7 @@
                 var that = this;
                 Service.getschoolinfo({}).then(function (response) {
                     if (response.data && response.data.data) {
-                        that.items[0].value = '已绑定'
-
+                        that.items[0].value = response.data.data.name;
                     }
                     else {
                         that.items[0].value = '未绑定'
@@ -91,15 +90,11 @@
 
                 switch (index) {
                     case 0: {
-
                         if (this.items[0].value == '已绑定') {
                             this.$router.push({name: 'msg', params: {state: '已绑定', Bindingschool: '广州风萧萧'}});
-
                         } else {
                             this.$router.push({name: 'Bindingschool'});
-
                         }
-
                     }
                         break;
                     case 1: {

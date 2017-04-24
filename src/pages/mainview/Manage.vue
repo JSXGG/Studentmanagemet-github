@@ -38,9 +38,14 @@
             getmyclasslist(){
                 let Items = [];
                 var that = this;
+                if(this.items.length == 0){
+                    this.$vux.loading.show({
+                        text: '加载中...'
+                    });
+                }
                 Service.getmyclasslist().then(function (response) {
-                    console.log(response);
                     if (response.data && response.data.data) {
+                        that.$vux.loading.hide();
                         response.data.data.forEach(function (item) {
                             let Obj = {
                                 name:item.name,

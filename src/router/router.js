@@ -30,28 +30,28 @@ const proRootDic = '/website/studentmanagemet/';
 /*配置路由目录*/
 const routes = [
     {
-        path: proRootDic, component: App, meta: {keepAlive: true}, redirect: proRootDic + 'login',
+        path: proRootDic, component: App, meta: {keepAlive: false}, redirect: proRootDic + 'login',
         //配置子路由 meta: {keepAlive: true}
         children: [
             {path: 'home', component: Home, meta: {keepAlive: true}, name: 'Home'},
 
-            {path: 'Mandatoryattendance/:type', component: Mandatoryattendance, meta: {keepAlive: true}, name: 'Mandatoryattendance'},
+            {path: 'Mandatoryattendance/:type', component: Mandatoryattendance, meta: {keepAlive: false}, name: 'Mandatoryattendance'},
 
-            {path: 'Attendancerecords/:Id', component: Attendancerecords, meta: {keepAlive: true}, name: 'Attendancerecords'},
+            {path: 'Attendancerecords/:Id', component: Attendancerecords, meta: {keepAlive: false}, name: 'Attendancerecords'},
 
             {path: 'manage', component: Manage, meta: {keepAlive: true}, name: 'Manage'},
-            {path: 'mobilephonebinding', component: Mobilephonebinding, meta: {keepAlive: true},name: 'Mobilephonebinding'},
-            {path: 'Bindingschool', component: Bindingschool, meta: {keepAlive: true}, name: 'Bindingschool'},
+            {path: 'mobilephonebinding', component: Mobilephonebinding, meta: {keepAlive: false},name: 'Mobilephonebinding'},
+            {path: 'Bindingschool', component: Bindingschool, meta: {keepAlive: false}, name: 'Bindingschool'},
             {path: 'msg', component: msg, meta: {keepAlive: true}, name: 'msg'},
-            {path: 'TeachersManagement', component: TeachersManagement, meta: {keepAlive: true}, name: 'TeachersManagement'},
-            {path: 'Addteacher', component: Addteacher, meta: {keepAlive: true}, name: 'Addteacher'},
+            {path: 'TeachersManagement', component: TeachersManagement, meta: {keepAlive: false}, name: 'TeachersManagement'},
+            {path: 'Addteacher', component: Addteacher, meta: {keepAlive: false}, name: 'Addteacher'},
 
             {path: 'setupthe', component: Setupthe, meta: {keepAlive: true}, name: 'Setupthe'},
-            {path: 'studentspage/:id/:name', component: Studentspage, meta: {keepAlive: true}, name: 'Studentspage'},
+            {path: 'studentspage/:id/:name', component: Studentspage, meta: {keepAlive: false}, name: 'Studentspage'},
             {path: 'studentspage/addstudent/:classid/:studentid/', component: Addstudentinfo,meta: {keepAlive: false},name: 'Addstudentinfo'},
-            {path: 'studentinfo/:classid/:studentid', component: Studentinfo, meta: {keepAlive: true}, name: 'Studentinfo'},
+            {path: 'studentinfo/:classid/:studentid', component: Studentinfo, meta: {keepAlive: false}, name: 'Studentinfo'},
             {path: 'commentontheinput/:classid/:studentid/:name/:recordid', component: Commentontheinput, meta: {keepAlive: true}, name: 'Commentontheinput'},
-            {path: 'phoneverification/:id/:name', component: Phoneverification, meta: {keepAlive: true}, name: 'Phoneverification'},
+            {path: 'phoneverification/:id/:name', component: Phoneverification, meta: {keepAlive: false}, name: 'Phoneverification'},
             { path: 'login', component: Login, name: 'login'}
         ]
     },

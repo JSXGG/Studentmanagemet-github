@@ -21,6 +21,7 @@
     "materialize-css": "^0.98.0",
     "mint-ui": "^2.2.1",
     "mockjs": "^1.0.1-beta3",
+    "moment": "^2.18.1",
     "muse-ui": "^2.0.0-rc.5",
     "vue": "^2.1.10",
     "vue-router": "^2.2.0",

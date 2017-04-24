@@ -19,4 +19,8 @@ UserService.getbindingschool = (model)=>{
 UserService.getstudentlistbymoment = (moment)=>{
     return Api.fetchDataByToken('/api/getstudentlistbymoment', 'post', {moment:moment});
 };
+/*获取签到列表*/
+UserService.getsignlistbyclassid = (model)=>{
+    return Api.fetchDataByToken('/api/getsignlistbyclassid', 'post', model);
+};
 export default UserService;

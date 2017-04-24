@@ -156,6 +156,12 @@
             reloadView(){
                 var items = [];
                 var that = this;
+
+                if(this.items.length == 0){
+                    this.$vux.loading.show({
+                        text: '加载中...'
+                    });
+                }
                 Service.getstudentlist(this.classId).then(function (response) {
                     if (response.data && response.data.data) {
                         response.data.data.forEach(function (item) {
@@ -168,6 +174,7 @@
                             };
                             items.push(Obj);
                         })
+                        that.$vux.loading.hide();
                     }
                     that.items = items;
                 });
