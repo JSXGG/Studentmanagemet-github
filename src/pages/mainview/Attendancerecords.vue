@@ -1,60 +1,58 @@
 <template>
-    <div>
-        <cell style="height: 25px" v-for="(item,index) in items " @click.native="onClick(index)" :title=item.name
-              is-link>
-            <img slot="icon" width="30" style="display:block;margin-right:5px;" :src="iconxs">
-            <img v-if="item.value==0" width="25" height="25" style="margin-right: 10px;margin-top: 8px" :src="icon1">
-            <img v-else width="25" height="25" style="margin-right: 10px;margin-top: 8px" :src="icon1">
-            <img v-if="item.record==0" width="25" height="25" style="margin-right: 15px;margin-top: 8px" :src="icon2">
-            <img v-else width="25" height="25" style="margin-right: 10px;margin-top: 8px" :src="icon3">
-
-
+    <div style="background: white">
+        <cell v-for="item in items" :title="item.info | formatName" v-if="item.info">
+            {{item.moment | moment}}
+            <div slots="child" style="display: flex;font-size: 12px;color: #26c6da">
+                <div style="padding-left: 10px">离开学校：{{item.leavetheschool | dateformat}}</div>
+                <div style="padding-left: 10px">进入机构：{{item.intotheorganization | dateformat}}</div>
+            </div>
         </cell>
-
     </div>
 </template>
 <style>
-    body {
-        background-color: #ff0000;
-    }
 </style>
 <script>
+    import Service from 'service/user'
     import {Group, Cell, XButton} from 'vux'
-
+    import 'filter/sdFilter'
     export default{
         data(){
             return {
-                msg: 'hello vue',
-                items: [
-                    {name: '张学友', value: '0', icon: require('../../assets/selected.png')},
-                    {name: '黄家驹', value: '0', icon: require('../../assets/uncheck.png')},
-                    {name: '谭咏麟', value: '0', icon: require('../../assets/uncheck.png')},
-                    {name: '张学友', value: '0', icon: require('../../assets/selected.png')},
-                ],
-                icon0: require('../../assets/uncheck.png'),
-                icon1: require('../../assets/uncheck.png'),
-                icon2: require('../../assets/uncheck.png'),
-                icon3: require('../../assets/selected.png'),
-                iconxs: require('../../assets/students.png'),
-
+                items: []
             }
         },
         methods: {
             reloadData: function () {
+                let title = this.$route.params.date + '考勤';
                 this.$store.commit('COMM_CONF', {
                     isBack: true,   //是否显示返回
-                    title: '考勤记录',  //显示标题内容
+                    title: title,  //显示标题内容
                     isHeader: true,  //是否显示头部标题
                     isFooter: false,
                     tabBarIndex: 0
                 });
+                this.getsignlistbydate(this.$route.params.date);
             },
-
+            getsignlistbydate(date){
+                let model = {
+                    date: date
+                }
+                var that = this;
+                if (this.items.length == 0) {
+                    this.$vux.loading.show({
+                        text: '加载中...'
+                    });
+                }
+                Service.getsignlistbydate(model).then(function (response) {
+                    if (response.data && response.data.data) {
+                        that.$vux.loading.hide();
+                        that.items = response.data.data;
+                    }
+                });
+            }
         },
         components: {
             Group, Cell, XButton
-
-        },
-
+        }
     }
 </script>

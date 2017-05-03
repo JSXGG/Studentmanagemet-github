@@ -1,6 +1,6 @@
 <template>
     <div>
-        <group style="background: white" v-for="(item,index) in items" is-link>
+        <group style="background: white" v-for="item in items" is-link>
             <flexbox>
                 <flexbox-item :span="0.4">
                     <p style="height: 40px;line-height: 40px;margin-left: 10px">{{item.firstname+item.lastname}}</p>

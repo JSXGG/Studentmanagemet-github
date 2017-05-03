@@ -27,4 +27,8 @@ UserService.getsignlistbyclassid = (model)=> {
 UserService.batchstudentsignin = (model)=> {
     return Api.fetchDataByToken('/api/batchstudentsignin', 'post', model);
 };
+/*根据日期获取学生签到记录*/
+UserService.getsignlistbydate = (model)=> {
+    return Api.fetchDataByToken('/api/getsignlistbydate', 'post', model);
+};
 export default UserService;

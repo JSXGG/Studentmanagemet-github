@@ -37,7 +37,7 @@ const routes = [
 
             {path: 'Mandatoryattendance/:type', component: Mandatoryattendance, meta: {keepAlive: false}, name: 'Mandatoryattendance'},
 
-            {path: 'Attendancerecords/:Id', component: Attendancerecords, meta: {keepAlive: false}, name: 'Attendancerecords'},
+            {path: 'Attendancerecords/:date', component: Attendancerecords, meta: {keepAlive: false}, name: 'Attendancerecords'},
 
             {path: 'manage', component: Manage, meta: {keepAlive: true}, name: 'Manage'},
             {path: 'mobilephonebinding', component: Mobilephonebinding, meta: {keepAlive: false},name: 'Mobilephonebinding'},

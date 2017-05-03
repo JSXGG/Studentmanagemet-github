@@ -1,6 +1,5 @@
 <template>
     <div>
-
         <tab :animate="true">
             <tab-item @on-item-click="consoleIndex(0)" selected>考勤</tab-item>
             <tab-item @on-item-click="consoleIndex(1)">考勤记录</tab-item>
@@ -11,12 +10,11 @@
             </cell>
         </div>
         <div v-else>
-            <cell v-for="(item,index) in items " title=' 2016-3-8 12:35:48 ' @click.native="AttendanceRecords(index)"
-                  is-link value="早托">
+            <cell v-for="item in dateItems " :title='item' @click.native="AttendanceRecords(item)"
+                  is-link>
                 <img slot="icon" width="25" style="display:block;margin-right:5px;" :src="icon0">
             </cell>
         </div>
-
     </div>
 </template>
 <style>
@@ -44,6 +42,7 @@
                     {name: ' 午托', value: '0', icon: require('../../assets/hz.png')},
                     {name: ' 晚托', value: '0', icon: require('../../assets/hz.png')},
                 ],
+                dateItems: [],
                 value: '0',
                 show5: false,
                 a: '',
@@ -61,9 +60,18 @@
                 });
             },
             consoleIndex (consoleIndex) {
-                console.log(consoleIndex);
-                let self = this;
-                self.value = consoleIndex;
+                this.value = consoleIndex;
+                if (consoleIndex == 1) {
+                    this.getdatesbyclassid();
+                }
+            },
+            getdatesbyclassid(){
+                var that = this;
+                Service.getdatesbyclassid().then(function (ret) {
+                    if (ret && ret.data && ret.data.data) {
+                        that.dateItems = ret.data.data;
+                    }
+                });
             },
             onClick (Index) {
                 if (Index == 0) {
@@ -71,11 +79,11 @@
                 } else {
                     this.$router.push({name: 'Mandatoryattendance', params: {type: '2'}});
                 }
-
-            }, AttendanceRecords (Index) {
-                console.log(Index);
-                this.$router.push({name: 'Attendancerecords', params: {Id: '已绑定'}});
             },
+            //进入日期记录。
+            AttendanceRecords (item) {
+                this.$router.push({name: 'Attendancerecords', params: {date: item}});
+            }
         },
         components: {
             ButtonTab,
