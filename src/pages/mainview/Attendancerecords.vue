@@ -1,5 +1,5 @@
 <template>
-    <div style="background: white">
+    <div style="background: white;margin-top: 10px">
         <cell v-for="item in items" :title="item.info | formatName" v-if="item.info">
             {{item.moment | moment}}
             <div slots="child" style="display: flex;font-size: 12px;color: #26c6da">

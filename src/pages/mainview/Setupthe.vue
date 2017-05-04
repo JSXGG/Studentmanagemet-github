@@ -50,7 +50,6 @@
             return {
                 items: [
                     {name: '绑定学校', icon: require('../../assets/Binding.png'), value: ''},
-//                    {name: '教师管理', icon: require('../../assets/Teachersmanagement.png'), value: ''},
                 ],
                 userInfo: sessionstorge.getUserInfo()
             }

@@ -56,7 +56,8 @@
                     title: '学生考勤',  //显示标题内容
                     isHeader: true,  //是否显示头部标题
                     isFooter: true,
-                    tabBarIndex: 0
+                    tabBarIndex: 0,
+                    showMore:false,
                 });
             },
             consoleIndex (consoleIndex) {

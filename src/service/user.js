@@ -31,4 +31,12 @@ UserService.batchstudentsignin = (model)=> {
 UserService.getsignlistbydate = (model)=> {
     return Api.fetchDataByToken('/api/getsignlistbydate', 'post', model);
 };
+/*添加批注*/
+UserService.addanotation = (model)=>{
+    return Api.fetchDataByToken('/api/addanotation', 'post', model);
+}
+/*根据记录id获取批注*/
+UserService.getnotationbyrecordid = (recordid)=>{
+    return Api.fetchDataByToken('/api/getnotationbyrecordid', 'post', {recordid});
+}
 export default UserService;

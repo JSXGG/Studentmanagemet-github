@@ -1,6 +1,6 @@
 <template>
     <div class="manage">
-        <group title="超优教育">
+        <group>
             <cell v-for="item in items" :title="item.name" :inline-desc="item.desc" style=""
                   @click.native="onClick(item)"
                   is-link>

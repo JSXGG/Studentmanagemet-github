@@ -25,6 +25,7 @@ const Studentinfo = resolve => require(['../pages/studentspage/Studentinfo'], re
 const Addstudentinfo = resolve =>require(['../pages/studentspage/Addstudentinfo'],resolve)
 const Commentontheinput = resolve => require(['../pages/studentspage/Commentontheinput'], resolve)
 const Login = resolve => require(['../pages/login/Login'], resolve)
+const Notationpage = resolve => require(['../pages/studentspage/Notationpage'],resolve)
 const proRootDic = '/website/studentmanagemet/';
 
 /*配置路由目录*/
@@ -34,11 +35,8 @@ const routes = [
         //配置子路由 meta: {keepAlive: true}
         children: [
             {path: 'home', component: Home, meta: {keepAlive: true}, name: 'Home'},
-
             {path: 'Mandatoryattendance/:type', component: Mandatoryattendance, meta: {keepAlive: false}, name: 'Mandatoryattendance'},
-
             {path: 'Attendancerecords/:date', component: Attendancerecords, meta: {keepAlive: false}, name: 'Attendancerecords'},
-
             {path: 'manage', component: Manage, meta: {keepAlive: true}, name: 'Manage'},
             {path: 'mobilephonebinding', component: Mobilephonebinding, meta: {keepAlive: false},name: 'Mobilephonebinding'},
             {path: 'Bindingschool', component: Bindingschool, meta: {keepAlive: false}, name: 'Bindingschool'},
@@ -46,13 +44,15 @@ const routes = [
             {path: 'TeachersManagement', component: TeachersManagement, meta: {keepAlive: false}, name: 'TeachersManagement'},
             {path: 'Addteacher', component: Addteacher, meta: {keepAlive: false}, name: 'Addteacher'},
 
+
             {path: 'setupthe', component: Setupthe, meta: {keepAlive: true}, name: 'Setupthe'},
             {path: 'studentspage/:id/:name', component: Studentspage, meta: {keepAlive: false}, name: 'Studentspage'},
+            {path: 'notationpage/:id', component: Notationpage, meta: {keepAlive: false}, name: 'Notationpage'},
             {path: 'studentspage/addstudent/:classid/:studentid/', component: Addstudentinfo,meta: {keepAlive: false},name: 'Addstudentinfo'},
-            {path: 'studentinfo/:classid/:studentid', component: Studentinfo, meta: {keepAlive: false}, name: 'Studentinfo'},
+            {path: 'studentinfo/:classid/:studentid', component: Studentinfo, meta: {keepAlive: true}, name: 'Studentinfo'},
             {path: 'commentontheinput/:classid/:studentid/:name/:recordid', component: Commentontheinput, meta: {keepAlive: true}, name: 'Commentontheinput'},
             {path: 'phoneverification/:id/:name', component: Phoneverification, meta: {keepAlive: false}, name: 'Phoneverification'},
-            { path: 'login', component: Login, name: 'login'}
+            {path: 'login', component: Login, name: 'login'}
         ]
     },
     {path: '*', redirect: proRootDic + 'login'}/*默认路由*/

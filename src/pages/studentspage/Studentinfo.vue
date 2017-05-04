@@ -2,7 +2,7 @@
     <div class="studentinfo">
         <div v-if="items.length == 0" style="text-align: center;color: #00bcd4;margin-top: 100px">请添加点评</div>
         <div class="pagebody">
-            <div class="block" v-for="item in items" @click="clicOntheblock(item)">
+            <div class="block" v-for="item in items">
                 <div class="formteach">
                     {{item.btime}}到{{item.etime}} 第{{item.week}}周<br>{{item.teachername}}的短评
                 </div>
@@ -19,6 +19,21 @@
                 <p style="padding: 10px">
                     {{item.problemsreflect}}
                 </p>
+                <flexbox style="padding: 10px">
+                    <flexbox-item :span="0.5">
+                        <x-button v-if="showNotation" @click.native="clicOntheNotation(item)" type="warn" :mini="true">
+                            批注
+                        </x-button>
+                    </flexbox-item>
+                    <flexbox-item :span="0.5">
+                        <div style="width: 100%;height: 29px" v-if="item.teacherid == userInfo.id">
+                            <x-button style="right: 18px;position: absolute" type="primary" :mini="true"
+                                      @click.native="clicOntheblock(item)">编辑
+                            </x-button>
+                        </div>
+                    </flexbox-item>
+
+                </flexbox>
             </div>
         </div>
         <div class="addbtn">
@@ -90,7 +105,8 @@
                 baseinfo: {},
                 nicname: '',
                 userInfo: sessionstorge.getUserInfo(),
-                items: []
+                items: [],
+                showNotation: true
             }
         },
         methods: {
@@ -110,9 +126,14 @@
                             classid: this.classid,
                             studentid: this.studentid,
                             name: this.nicname,
-                            recordid:item.id}
+                            recordid: item.id
+                        }
                     });
                 }
+            },
+            /*点击批注*/
+            clicOntheNotation(item){
+                this.$router.push({name: 'Notationpage', params: {id: item.id}});
             },
             setHeaderViewTitle(title){
                 this.$store.commit('COMM_CONF', {
@@ -151,7 +172,7 @@
             clickOntheAddBtn(){
                 this.$router.push({
                     name: 'Commentontheinput',
-                    params: {classid: this.classid, studentid: this.studentid, name: this.nicname,recordid:'0'}
+                    params: {classid: this.classid, studentid: this.studentid, name: this.nicname, recordid: '0'}
                 });
             }
         },

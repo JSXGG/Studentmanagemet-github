@@ -21,13 +21,24 @@ vue.filter('moment', function (value) {
 })
 
 vue.filter('dateformat', function (value) {
-    var day = moment.unix(value).format('HH:mm');
-    return day;
+    if(value&&value.length>0){
+        var day = moment.unix(value).format('HH:mm');
+        return day;
+    }
+    return '--'
 })
 
 vue.filter('formatName', function (item) {
     if (item) {
         return item.firstname + item.lastname;
+    }
+    return ''
+})
+
+
+vue.filter('formatNameNotationpage', function (item) {
+    if (item) {
+        return item.firstname + item.lastname+'老师的批注';
     }
     return ''
 })

@@ -1,5 +1,8 @@
 <template>
     <div>
+        <group>
+            <selector title="当前班级" :options="selectorOptions" v-model="currentClass"></selector>
+        </group>
         <group style="background: white" v-for="item in items" is-link>
             <flexbox>
                 <flexbox-item :span="0.4">
@@ -24,8 +27,10 @@
 </style>
 <script>
     import Service from 'service/user'
+    import myclassService from 'service/myclass'
+
     import moment from 'moment';
-    import {Checklist, Group, Cell, Toast, XButton, Flexbox, FlexboxItem} from 'vux'
+    import {Checklist, Group, Cell, Toast, XButton, Flexbox, FlexboxItem, Selector} from 'vux'
     export default {
         data () {
             return {
@@ -36,11 +41,35 @@
                 commonList2: [
                     {key: '1', value: '到达'}
                 ],
-                items: []
+                items: [],
+                allItems: [],
+                selectorOptions: [
+                    {key: '-1', value: '全部'}
+                ],
+                currentClass: '-1'
+            }
+        },
+        watch: {
+            currentClass(val){
+                this.filterClassByID(val);
             }
         },
         computed: {},
         methods: {
+            filterClassByID(value){
+                if (value == -1) {
+                    this.items = this.allItems;
+                }
+                else {
+                    let Items = [];
+                    this.allItems.forEach(function (item) {
+                        if (item.classid == value) {
+                            Items.push(item);
+                        }
+                    });
+                    this.items = Items;
+                }
+            },
             reloadData: function () {
                 this.$store.commit('COMM_CONF', {
                     isBack: true,   //是否显示返回
@@ -51,6 +80,10 @@
                 });
                 this.moment = this.$route.params.type;
                 this.getAccessclass(this.moment);
+                this.getmyclasslist();
+            },
+            swichClass(){
+                console.log('切换班级')
             },
             clickOntheEnter(){
                 let model = [];
@@ -98,6 +131,25 @@
                     console.log(response);
                 });
             },
+            getmyclasslist(){
+                var items = [];
+                var that = this;
+                myclassService.getmyclasslist().then(function (response) {
+                    if (response.data && response.data.data) {
+                        let array = response.data.data;
+                        let allItem = {key: '-1', value: '全部'};
+                        items.push(allItem);
+                        array.forEach(function (item) {
+                            let Obj = {
+                                key: item.id,
+                                value: item.name
+                            }
+                            items.push(Obj);
+                        });
+                        that.selectorOptions = items;
+                    }
+                });
+            },
             getAccessclass(Id){
                 var that = this;
                 var items = [];
@@ -115,7 +167,8 @@
                         that.$vux.loading.hide();
                         that.GetSignListbyClassid();
                     }
-                    that.items = items;
+                    that.allItems = items;
+                    that.filterClassByID(that.currentClass);
                 });
             },
             //获取签到列表
@@ -162,7 +215,8 @@
             Toast,
             XButton,
             Flexbox,
-            FlexboxItem
+            FlexboxItem,
+            Selector
         }
     }
 

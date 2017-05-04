@@ -1,6 +1,6 @@
 <template>
     <div class="mt-header">
-        <XHeader :left-options="{showBack: commConf.isBack}">{{commConf.title}}</XHeader>
+        <XHeader :left-options="{showBack: commConf.isBack}" :right-options="{showMore: commConf.showMore}" >{{commConf.title}}</XHeader>
     </div>
 </template>
 <style lang="less" rel="stylesheet/less">
