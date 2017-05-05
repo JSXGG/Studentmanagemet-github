@@ -5,21 +5,17 @@
                 <img class="img" slot="icon" style="display:block;float:right" :src="headimgurl">
             </cell>
 
-            <cell class="cellId" style="height: 40px" v-for="(item,index) in items" :value="item.value"
-                  :title="item.name"
-                  is-link>
+            <cell class="cellId" v-for="(item,index) in items" :value="item.value"
+                  :title="item.name">
                 <img slot="icon" width="25" style="display:block;margin-right:15px;" :src="item.icon">
-
+            </cell>
+            <cell @click.native="clickOntheConclusion" title="工作总结" is-link>
+                <img slot="icon" width="25" style="display:block;margin-right:15px;" src="../../assets/report.png">
             </cell>
         </group>
         <h1 style="text-align: center"></h1>
-
     </div>
-
-
 </template>
-
-
 <style lang="less" rel="stylesheet/less">
     @import '../../theme.less';
 
@@ -30,15 +26,8 @@
     .setupthe .img {
         width: 50px;
         height: 50px;
-        /*<!--border-radius: 30px;-->*/
         margin-right: 15px;
-        /*<!--border: 2px solid @theme-color-->*/
     }
-
-    .cellId {
-
-    }
-
 </style>
 
 <script>
@@ -84,26 +73,10 @@
                     }
                 });
             },
-            onClick (index)
-            {
-
-                switch (index) {
-                    case 0: {
-                        if (this.items[0].value == '已绑定') {
-                            this.$router.push({name: 'msg', params: {state: '已绑定', Bindingschool: '广州风萧萧'}});
-                        } else {
-                            this.$router.push({name: 'Bindingschool'});
-                        }
-                    }
-                        break;
-                    case 1: {
-
-                        this.$router.push({name: 'TeachersManagement'});
-
-                    }
-                        break;
-                    default:
-                }
+            //工作总结
+            clickOntheConclusion(){
+                console.log('12312');
+                this.$router.push({name: 'WorkconclusionList'});
             }
         },
         components: {

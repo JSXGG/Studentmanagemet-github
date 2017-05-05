@@ -3,18 +3,17 @@
         <group title="选择时间段">
             <datetime v-model="model.btime" @on-change="change" title="开始日期"></datetime>
             <datetime v-model="model.etime" @on-change="change" title="结束日期"></datetime>
-            <x-input title="第几周" type="tel" v-model="model.week"></x-input>
         </group>
-        <group title="本周工作总结">
+        <group title="工作感悟与自我认知总结 ">
             <x-textarea v-model="model.weekworksummary" :max="1000" placeholder="请填写详本周工作总结"
                         @on-focus="onEvent('focus')"
                         @on-blur="onEvent('blur')"></x-textarea>
         </group>
-        <group title="下周计划">
+        <group title="自我存在的问题与改进措施">
             <x-textarea v-model="model.nextworkplan" :max="500" placeholder="请填写下周计划" @on-focus="onEvent('focus')"
                         @on-blur="onEvent('blur')"></x-textarea>
         </group>
-        <group title="问题反思与改进方案">
+        <group title="下个月的工作或成长计划">
             <x-textarea v-model="model.problemsreflect" :max="500" placeholder="请填写问题反思与改进方案"
                         @on-focus="onEvent('focus')"
                         @on-blur="onEvent('blur')"></x-textarea>
@@ -42,8 +41,6 @@
                 model: {
                     btime: '',
                     etime: '',
-                    week: '',
-                    semester: '',
                     weekworksummary: '',
                     nextworkplan: '',
                     problemsreflect: '',
@@ -53,16 +50,20 @@
         },
         methods: {
             reloadData: function () {
-                var title = this.$route.params.name;
-                console.log();
+                this.recordid = this.$route.params.recordid;
+                var title = ''
+                if (this.recordid == 0) {
+                    title = '添加工作总结'
+                }
+                else {
+                    title = '编辑总结'
+                }
                 this.$store.commit('COMM_CONF', {
                     isBack: true,
                     title: title,
                     isHeader: true,
                     isFooter: false,
                 });
-                this.model.studentid = this.$route.params.studentid;
-                this.recordid = this.$route.params.recordid;
                 if (this.recordid && this.recordid != 0) {
                     this.getcommentbyrecordid(this.recordid);
                 }

@@ -22,12 +22,16 @@ const Addteacher = resolve => require(['../pages/settingpage/Addteacher'], resol
 const Phoneverification = resolve => require(['../pages/settingpage/Phoneverification'], resolve)
 const Studentspage = resolve => require(['../pages/studentspage/Studentspage'], resolve)
 const Studentinfo = resolve => require(['../pages/studentspage/Studentinfo'], resolve)
-const Addstudentinfo = resolve =>require(['../pages/studentspage/Addstudentinfo'],resolve)
+const Addstudentinfo = resolve =>require(['../pages/studentspage/Addstudentinfo'], resolve)
 const Commentontheinput = resolve => require(['../pages/studentspage/Commentontheinput'], resolve)
 const Login = resolve => require(['../pages/login/Login'], resolve)
-const Notationpage = resolve => require(['../pages/studentspage/Notationpage'],resolve)
-const proRootDic = '/website/studentmanagemet/';
+const Notationpage = resolve => require(['../pages/studentspage/Notationpage'], resolve)
+const WorkconclusionList = resolve => require(['../pages/workconclusion/WorkconclusionList'], resolve)
+// Addtheworksummary
+const Addtheworksummary = resolve => require(['../pages/workconclusion/Addtheworksummary'], resolve)
 
+
+const proRootDic = '/website/studentmanagemet/';
 /*配置路由目录*/
 const routes = [
     {
@@ -35,24 +39,67 @@ const routes = [
         //配置子路由 meta: {keepAlive: true}
         children: [
             {path: 'home', component: Home, meta: {keepAlive: true}, name: 'Home'},
-            {path: 'Mandatoryattendance/:type', component: Mandatoryattendance, meta: {keepAlive: false}, name: 'Mandatoryattendance'},
-            {path: 'Attendancerecords/:date', component: Attendancerecords, meta: {keepAlive: false}, name: 'Attendancerecords'},
+            {
+                path: 'Mandatoryattendance/:type',
+                component: Mandatoryattendance,
+                meta: {keepAlive: false},
+                name: 'Mandatoryattendance'
+            },
+            {
+                path: 'Attendancerecords/:date',
+                component: Attendancerecords,
+                meta: {keepAlive: false},
+                name: 'Attendancerecords'
+            },
             {path: 'manage', component: Manage, meta: {keepAlive: true}, name: 'Manage'},
-            {path: 'mobilephonebinding', component: Mobilephonebinding, meta: {keepAlive: false},name: 'Mobilephonebinding'},
+            {
+                path: 'mobilephonebinding',
+                component: Mobilephonebinding,
+                meta: {keepAlive: false},
+                name: 'Mobilephonebinding'
+            },
             {path: 'Bindingschool', component: Bindingschool, meta: {keepAlive: false}, name: 'Bindingschool'},
             {path: 'msg', component: msg, meta: {keepAlive: true}, name: 'msg'},
-            {path: 'TeachersManagement', component: TeachersManagement, meta: {keepAlive: false}, name: 'TeachersManagement'},
+            {
+                path: 'TeachersManagement',
+                component: TeachersManagement,
+                meta: {keepAlive: false},
+                name: 'TeachersManagement'
+            },
             {path: 'Addteacher', component: Addteacher, meta: {keepAlive: false}, name: 'Addteacher'},
 
 
             {path: 'setupthe', component: Setupthe, meta: {keepAlive: true}, name: 'Setupthe'},
             {path: 'studentspage/:id/:name', component: Studentspage, meta: {keepAlive: false}, name: 'Studentspage'},
             {path: 'notationpage/:id', component: Notationpage, meta: {keepAlive: false}, name: 'Notationpage'},
-            {path: 'studentspage/addstudent/:classid/:studentid/', component: Addstudentinfo,meta: {keepAlive: false},name: 'Addstudentinfo'},
-            {path: 'studentinfo/:classid/:studentid', component: Studentinfo, meta: {keepAlive: true}, name: 'Studentinfo'},
-            {path: 'commentontheinput/:classid/:studentid/:name/:recordid', component: Commentontheinput, meta: {keepAlive: true}, name: 'Commentontheinput'},
-            {path: 'phoneverification/:id/:name', component: Phoneverification, meta: {keepAlive: false}, name: 'Phoneverification'},
-            {path: 'login', component: Login, name: 'login'}
+            {
+                path: 'studentspage/addstudent/:classid/:studentid/',
+                component: Addstudentinfo,
+                meta: {keepAlive: false},
+                name: 'Addstudentinfo'
+            },
+            {
+                path: 'studentinfo/:classid/:studentid',
+                component: Studentinfo,
+                meta: {keepAlive: true},
+                name: 'Studentinfo'
+            },
+            {
+                path: 'commentontheinput/:classid/:studentid/:name/:recordid',
+                component: Commentontheinput,
+                meta: {keepAlive: true},
+                name: 'Commentontheinput'
+            },
+            {
+                path: 'phoneverification/:id/:name',
+                component: Phoneverification,
+                meta: {keepAlive: false},
+                name: 'Phoneverification'
+            },
+            {path: 'login', component: Login, name: 'login'},
+            {path: 'workconclusionList', component: WorkconclusionList, name: 'WorkconclusionList'},
+            {path: 'addtheworksummary/:recordid', component: Addtheworksummary, name: 'Addtheworksummary'}
+
         ]
     },
     {path: '*', redirect: proRootDic + 'login'}/*默认路由*/
