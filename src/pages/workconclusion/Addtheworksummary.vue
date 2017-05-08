@@ -5,16 +5,16 @@
             <datetime v-model="model.etime" @on-change="change" title="结束日期"></datetime>
         </group>
         <group title="工作感悟与自我认知总结 ">
-            <x-textarea v-model="model.weekworksummary" :max="1000" placeholder="请填写详本周工作总结"
+            <x-textarea v-model="model.workfeeling" :max="1000" placeholder="请填写详本周工作总结"
                         @on-focus="onEvent('focus')"
                         @on-blur="onEvent('blur')"></x-textarea>
         </group>
         <group title="自我存在的问题与改进措施">
-            <x-textarea v-model="model.nextworkplan" :max="500" placeholder="请填写下周计划" @on-focus="onEvent('focus')"
+            <x-textarea v-model="model.problem" :max="500" placeholder="请填写下周计划" @on-focus="onEvent('focus')"
                         @on-blur="onEvent('blur')"></x-textarea>
         </group>
         <group title="下个月的工作或成长计划">
-            <x-textarea v-model="model.problemsreflect" :max="500" placeholder="请填写问题反思与改进方案"
+            <x-textarea v-model="model.nextmonthplan" :max="500" placeholder="请填写问题反思与改进方案"
                         @on-focus="onEvent('focus')"
                         @on-blur="onEvent('blur')"></x-textarea>
         </group>
@@ -24,27 +24,22 @@
     </div>
 </template>
 <style lang="less" rel="stylesheet/less">
-
 </style>
 <script>
     import {XTextarea, Group, XButton, Datetime, Picker, XInput} from 'vux'
-    import Service from 'service/student'
+    import Service from 'service/user'
 
     export default {
         data () {
             return {
-                startDate: '',
-                endDate: '',
-                week: '',
                 recordid: '',
                 items: [],
                 model: {
                     btime: '',
                     etime: '',
-                    weekworksummary: '',
-                    nextworkplan: '',
-                    problemsreflect: '',
-                    studentid: ''
+                    workfeeling: '',
+                    problem: '',
+                    nextmonthplan: '',
                 }
             }
         },
@@ -65,7 +60,7 @@
                     isFooter: false,
                 });
                 if (this.recordid && this.recordid != 0) {
-                    this.getcommentbyrecordid(this.recordid);
+                    this.getworkreportbyid(this.recordid);
                 }
             },
             clickOntheSave() {
@@ -76,7 +71,7 @@
                 if (this.recordid && this.recordid != 0) {
                     this.model.recordid = this.recordid;
                 }
-                Service.addstudentcomment(this.model).then(function (response) {
+                Service.addtheeditorworkreport(this.model).then(function (response) {
                     if (response.data && response.data.result == '1') {
                         that.$vux.loading.hide();
                         that.$vux.toast.show({
@@ -85,9 +80,9 @@
                     }
                 });
             },
-            getcommentbyrecordid(recordid){
+            getworkreportbyid(recordid){
                 var that = this;
-                Service.getcommentbyrecordid(recordid).then(function (response) {
+                Service.getworkreportbyid(recordid).then(function (response) {
                     if (response.data && response.data.data) {
                         for (let key in that.model) {
                             that.model[key] = response.data.data[key]

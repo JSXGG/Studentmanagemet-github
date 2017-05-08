@@ -14,7 +14,6 @@ UserService.gettecherinfobyid = (model)=> {
 UserService.getbindingschool = (model)=> {
     return Api.fetchDataByToken('/api/bindingschool', 'post', model);
 };
-
 /*获取学生列表*/
 UserService.getstudentlistbymoment = (moment)=> {
     return Api.fetchDataByToken('/api/getstudentlistbymoment', 'post', {moment: moment});
@@ -32,11 +31,27 @@ UserService.getsignlistbydate = (model)=> {
     return Api.fetchDataByToken('/api/getsignlistbydate', 'post', model);
 };
 /*添加批注*/
-UserService.addanotation = (model)=>{
+UserService.addanotation = (model)=> {
     return Api.fetchDataByToken('/api/addanotation', 'post', model);
 }
 /*根据记录id获取批注*/
-UserService.getnotationbyrecordid = (recordid)=>{
+UserService.getnotationbyrecordid = (recordid)=> {
     return Api.fetchDataByToken('/api/getnotationbyrecordid', 'post', {recordid});
+}
+/*添加老师的工作总结*/
+UserService.addtheeditorworkreport = (model)=> {
+    return Api.fetchDataByToken('/api/addtheeditorworkreport', 'post', model);
+}
+/*删除工作总结*/
+UserService.delworkreportbyid = (recordid)=> {
+    return Api.fetchDataByToken('/api/delworkreportbyid', 'post', {recordid});
+}
+/*获取工作总结的列表*/
+UserService.getworkreportlist = ()=> {
+    return Api.fetchDataByToken('/api/getworkreportlist', 'post', {});
+}
+/*根据id获取工作总结*/
+UserService.getworkreportbyid = (recordid)=> {
+    return Api.fetchDataByToken('/api/getworkreportbyid', 'post', {recordid});
 }
 export default UserService;

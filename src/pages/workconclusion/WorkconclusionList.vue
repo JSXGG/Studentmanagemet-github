@@ -1,8 +1,13 @@
 <template>
     <div class="studentspage">
         <group>
-            <cell v-for="item in items" :title="item.name" @click.native="onClick(item)" is-link
-                  :value="item.moment | moment"></cell>
+            <cell v-for="item in items" :title="getTitleByItem(item)" is-link>
+                <div slots="after-title">
+                    <x-button mini type="warn" @click.native="onClick(item)">编辑</x-button>
+
+                    <x-button mini type="primary" @click.native="delreocrd(item)">删除</x-button>
+                </div>
+            </cell>
         </group>
         <div style="margin: 20px 10px 20px 10px">
             <x-button type="primary" @click.native="clickOntheAdd">添加</x-button>
@@ -57,16 +62,11 @@
 <script>
     import {XButton, Cell, Group, Popup, Actionsheet} from 'vux'
     import vue from 'vue'
-    import Service from 'service/student'
+    import Service from 'service/user'
     import 'filter/sdFilter'
     export default {
         data () {
             return {
-                menusOptions: [
-                    {label: '点评', type: 'primary', value: '0'},
-                    {label: '编辑', type: 'primary', value: '1'},
-                    {label: '删除', type: 'warn', value: '2'}
-                ],
                 sheetModel: false,
                 showPopup: false,
                 name: '',
@@ -81,50 +81,18 @@
         },
         methods: {
             onClick: function (item) {
-                this.currentItem = item;
-                this.sheetModel = true;
+                this.$router.push({name: 'Addtheworksummary', params: {recordid: item.recordid}});
             },
-            clickMenu(val) {
-                if (val == '0') {
-                    this.$router.push({
-                        name: 'Studentinfo',
-                        params: {classid: this.classId, studentid: this.currentItem.id}
-                    });
-                }
-                else if (val == '1') {
-                    this.$router.push({
-                        name: 'Addstudentinfo',
-                        params: {classid: this.classId, studentid: this.currentItem.id}
-                    });
-                }
-                else if (val == '2') {
-                    this.delstudent();
-                }
-                else {
-                    return;
-                }
-            },
-            onHide () {
-                console.log('on hide')
-            },
-            onShow () {
-                console.log('on show')
-            },
-            delstudent: function () {
-                this.show = true;
+            delreocrd(item){
                 var that = this;
-                let model = {
-                    classid: this.classId,
-                    studentid: this.currentItem.id
-                }
                 this.$vux.alert.show({
                     title: '请注意',
-                    content: '删除之后学生之后资料无法恢复，是否确定？',
+                    content: '删除之后记录无法恢复',
                     onHide () {
                         that.$vux.loading.show({
                             text: '正在删除'
                         });
-                        Service.delstudent(model).then(function (response) {
+                        Service.delworkreportbyid(item.recordid).then(function (response) {
                             if (response.data && response.data.result == 1) {
                                 that.$vux.loading.hide();
                                 that.$vux.toast.show({
@@ -139,6 +107,12 @@
                     this.$vux.alert.hide()
                 }, 3000)
             },
+            onHide () {
+                console.log('on hide')
+            },
+            onShow () {
+                console.log('on show')
+            },
             reloadData: function () {
                 this.name = this.$route.params.name;
                 this.classId = this.$route.params.id;
@@ -151,33 +125,25 @@
                 this.reloadView();
             },
             reloadView(){
-                var items = [];
                 var that = this;
-
                 if (this.items.length == 0) {
                     this.$vux.loading.show({
                         text: '加载中...'
                     });
                 }
-                Service.getstudentlist(this.classId).then(function (response) {
+                Service.getworkreportlist(this.classId).then(function (response) {
                     if (response.data && response.data.data) {
-                        response.data.data.forEach(function (item) {
-                            let Obj = {
-                                name: item.firstname + item.lastname,
-                                number: '12',
-                                icon: require('../../assets/Student.png'),
-                                moment: item.moment,
-                                id: item.id
-                            };
-                            items.push(Obj);
-                        })
+                        that.items = response.data.data;
                         that.$vux.loading.hide();
                     }
-                    that.items = items;
                 });
             },
             clickOntheAdd(){
-                this.$router.push({name: 'Addtheworksummary', params: {recordid:'0'}});
+                this.$router.push({name: 'Addtheworksummary', params: {recordid: '0'}});
+            },
+            getTitleByItem(item){
+                let title = item.btime + '～' + item.etime + '工作总结';
+                return title;
             }
         },
         components: {
