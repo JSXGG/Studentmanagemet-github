@@ -28,7 +28,6 @@
 <script>
     import Service from 'service/user'
     import myclassService from 'service/myclass'
-
     import moment from 'moment';
     import {Checklist, Group, Cell, Toast, XButton, Flexbox, FlexboxItem, Selector} from 'vux'
     export default {
@@ -186,7 +185,7 @@
                             that.items.forEach(function (item2) {
                                 if (item2.id == item1.studentid) {
                                     let into = item1.intotheorganization ? String(item1.intotheorganization) : '';
-                                    let lev = item1.leavetheschool ? String(item1.leavetheschool) : ''
+                                    let lev = item1.leavetheschool ? String(item1.leavetheschool) : '';
                                     if (lev.length > 0 && into.length > 0) {
                                         item2['key1'] = ['1'];
                                         item2['key2'] = ['1'];
@@ -219,5 +218,4 @@
             Selector
         }
     }
-
 </script>
