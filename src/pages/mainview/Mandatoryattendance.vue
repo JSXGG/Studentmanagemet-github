@@ -5,16 +5,21 @@
         </group>
         <group style="background: white" v-for="item in items" is-link>
             <flexbox>
-                <flexbox-item :span="0.4">
+                <flexbox-item :span="0.2">
                     <p style="height: 40px;line-height: 40px;margin-left: 10px">{{item.firstname+item.lastname}}</p>
                 </flexbox-item>
-                <flexbox-item :span="0.3">
+                <flexbox-item :span="0.25">
                     <Checklist v-model="item.key1" :options="commonList1">
                     </Checklist>
                 </flexbox-item>
-                <flexbox-item :span="0.3">
+                <flexbox-item :span="0.25">
                     <Checklist v-model="item.key2" :options="commonList2">
                     </Checklist>
+                </flexbox-item>
+                <flexbox-item :span="0.3">
+                    <x-button mini type="default" style="width: 80px;font-size: 12px"
+                              @click.native="clickStudyReport(item)">学习报告
+                    </x-button>
                 </flexbox-item>
             </flexbox>
         </group>
@@ -114,6 +119,9 @@
                 }
                 this.batchstudentsignin(Data);
             },
+            clickStudyReport(item){
+                this.$router.push({name: 'Studyreport', params: {id: item.id}});
+            },
             //签到
             batchstudentsignin(model){
                 let that = this;
@@ -142,7 +150,7 @@
                             let Obj = {
                                 key: item.id,
                                 value: item.name
-                            }
+                            };
                             items.push(Obj);
                         });
                         that.selectorOptions = items;
