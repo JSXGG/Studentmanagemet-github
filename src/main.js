@@ -17,6 +17,9 @@ const app = new Vue({
 Vue.mixin({
     mixins: [mixins]
 });
+
+
+
 import  { LoadingPlugin ,ToastPlugin} from 'vux'
 Vue.use(LoadingPlugin);
 Vue.use(AlertPlugin)
