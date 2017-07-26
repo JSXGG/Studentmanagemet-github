@@ -4,16 +4,14 @@
             <cell v-for="item in items" :title="item.name" @click.native="onClick(item)" is-link
                   :value="item.moment | moment"></cell>
         </group>
-        <div style="margin: 20px 10px 20px 10px">
-            <x-button type="primary" @click.native="clickOntheAdd">添加学生</x-button>
-        </div>
         <actionsheet v-model="sheetModel" :menus="menusOptions" @on-click-menu="clickMenu"
                      show-cancel>
         </actionsheet>
+        <div @click="clickOntheAdd" class="stm-add-btn"></div>
     </div>
 </template>
 <style lang="less" rel="stylesheet/less">
-    @import '../../theme.less';
+    @import '../../less/theme.less';
 
     .studentspage {
         margin: 0px;
@@ -119,11 +117,14 @@
                 let model = {
                     classid: this.classId,
                     studentid: this.currentItem.id
-                }
-                this.$vux.alert.show({
+                };
+                this.$vux.confirm.show({
                     title: '请注意',
                     content: '删除之后学生之后资料无法恢复，是否确定？',
-                    onHide () {
+                    onCancel () {
+                        console.log('plugin cancel')
+                    },
+                    onConfirm () {
                         that.$vux.loading.show({
                             text: '正在删除'
                         });
@@ -132,15 +133,12 @@
                                 that.$vux.loading.hide();
                                 that.$vux.toast.show({
                                     text: '删除成功'
-                                })
+                                });
                                 that.reloadView();
                             }
                         });
                     }
-                })
-                setTimeout(() => {
-                    this.$vux.alert.hide()
-                }, 3000)
+                });
             },
             reloadData: function () {
                 this.name = this.$route.params.name;

@@ -1,25 +1,18 @@
 <template>
-    <div style="width: 100%;height: 100%">
-        <sdheader v-if="commConf.isHeader"></sdheader>
+    <div>
         <div class="app-container">
             <keep-alive>
                 <router-view v-if="$route.meta.keepAlive"></router-view>
             </keep-alive>
             <router-view v-if="!$route.meta.keepAlive"></router-view>
         </div>
-        <!--<div class="theboothbar-foot"></div>-->
-        <sdfoot v-if="commConf.isFooter"></sdfoot>
     </div>
 </template>
 <style lang="less" rel="stylesheet/less">
-    @import '../node_modules/vux/src/styles/reset.less';
-    @import '../node_modules/vux/src/styles/1px.less';
-    @import '../node_modules/vux/src/styles/tap.less';
-
     .app-container {
         width: 100%;
         position: absolute;
-        margin-top: 46px;
+        bottom: 60px;
     }
 </style>
 <script>

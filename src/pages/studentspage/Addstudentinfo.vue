@@ -158,7 +158,10 @@
                                 that.$vux.loading.hide();
                                 that.$vux.toast.show({
                                     text: '添加成功'
-                                })
+                                });
+                                setTimeout(()=>{
+                                    that.$router.go(-1);
+                                },1000);
                             }
                         })
                     }
@@ -170,6 +173,9 @@
                                 that.$vux.toast.show({
                                     text: '修改成功'
                                 })
+                                setTimeout(()=>{
+                                    that.$router.go(-1);
+                                },1000);
                             }
                         })
                     }
