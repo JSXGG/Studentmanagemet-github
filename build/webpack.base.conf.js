@@ -1,7 +1,22 @@
 var path = require('path')
 var utils = require('./utils')
 var config = require('../config')
-var vueLoaderConfig = require('./vue-loader.conf')
+var _vueLoaderConfig = require('./vue-loader.conf')
+var HappyPack = require('happypack');
+const os = require('os');
+var happyThreadPool = HappyPack.ThreadPool({size: os.cpus().length});
+var merge = require('webpack-merge')
+var isProduction = process.env.NODE_ENV === 'production';
+if (!isProduction) {
+    var vueLoaderConfig = merge(_vueLoaderConfig, {
+        loaders: {
+            js: 'happypack/loader?id=babel',
+            css: 'vue-style-loader!happypack/loader?id=css',
+            less: 'vue-style-loader!happypack/loader?id=css!happypack/loader?id=less',
+        }
+    });
+}
+
 
 function resolve(dir) {
     return path.join(__dirname, '..', dir)
@@ -28,7 +43,7 @@ const webpackConfig = {
         //模块别名定义，方便后续直接引用别名，无须多写长长的地址
         alias: {
             'vue$': 'vue/dist/vue.common.js',
-            'filter':path.resolve(__dirname, '../src/filter'),
+            'filter': path.resolve(__dirname, '../src/filter'),
             'src': path.resolve(__dirname, '../src'),
             'assets': path.resolve(__dirname, '../src/assets'),
             'components': path.resolve(__dirname, '../src/components'),
@@ -74,7 +89,26 @@ const webpackConfig = {
                 loader: 'babel'
             }
         ]
-    }
+    },
+    plugins: [
+        new HappyPack({
+            id: 'babel',
+            threadPool: happyThreadPool,
+            loaders: ['babel-loader?cacheDirectory=true'],
+        }),
+        new HappyPack({
+            id: 'css',
+            threadPool: happyThreadPool,
+            cache: false,
+            loaders: ['css-loader?importLoaders=1'],
+        }),
+        new HappyPack({
+            id: 'less',
+            threadPool: happyThreadPool,
+            cache: false,
+            loaders: ['less-loader'],
+        })
+    ]
 }
 const vuxLoader = require('vux-loader')
 module.exports = vuxLoader.merge(webpackConfig, {
@@ -85,7 +119,7 @@ module.exports = vuxLoader.merge(webpackConfig, {
         },
         {
             name: 'less-theme',
-            path: 'src/theme.less'
+            path: 'src/less/theme.less'
         }
     ]
 })

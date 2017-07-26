@@ -2,6 +2,8 @@ import Vue from 'vue'
 import router from './router/router'
 import store from './store/store'//使用vuex。
 import mixins from './mixins/page.mixins'
+import './less/theme.less'
+
 import  { AlertPlugin } from 'vux'
 const FastClick = require('fastclick')
 FastClick.attach(document.body)
@@ -20,10 +22,11 @@ Vue.mixin({
 
 
 
-import  { LoadingPlugin ,ToastPlugin} from 'vux'
+import  { LoadingPlugin ,ToastPlugin,ConfirmPlugin} from 'vux'
 Vue.use(LoadingPlugin);
-Vue.use(AlertPlugin)
+Vue.use(AlertPlugin);
 Vue.use(ToastPlugin);
+Vue.use(ConfirmPlugin);
 
 window.myVue = Vue;
 

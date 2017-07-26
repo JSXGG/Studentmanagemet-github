@@ -1,22 +1,20 @@
 <template>
     <div class="studentspage">
+        <p v-if="items.length===0" style="text-align: center;margin-top: 40px">当前没有工作报告</p>
         <group>
             <cell v-for="item in items" :title="getTitleByItem(item)" is-link>
                 <div slots="after-title">
-                    <x-button mini type="warn" @click.native="onClick(item)">编辑</x-button>
+                    <x-button mini type="primary" @click.native="onClick(item)">编辑</x-button>
 
-                    <x-button mini type="primary" @click.native="delreocrd(item)">删除</x-button>
+                    <x-button mini type="warn" @click.native="delreocrd(item)">删除</x-button>
                 </div>
             </cell>
         </group>
-        <div style="margin: 20px 10px 20px 10px">
-            <x-button type="primary" @click.native="clickOntheAdd">添加</x-button>
-        </div>
+        <div class="stm-add-btn"  @click ="clickOntheAdd"></div>
     </div>
 </template>
 <style lang="less" rel="stylesheet/less">
-    @import '../../theme.less';
-
+    @import '../../less/theme.less';
     .studentspage {
         margin: 0px;
     }
@@ -85,10 +83,11 @@
             },
             delreocrd(item){
                 var that = this;
-                this.$vux.alert.show({
+
+                this.$vux.confirm.show({
                     title: '请注意',
-                    content: '删除之后记录无法恢复',
-                    onHide () {
+                    content: '删除之后记录无法恢复，是否确定？',
+                    onConfirm () {
                         that.$vux.loading.show({
                             text: '正在删除'
                         });
@@ -102,10 +101,7 @@
                             }
                         });
                     }
-                })
-                setTimeout(() => {
-                    this.$vux.alert.hide()
-                }, 3000)
+                });
             },
             onHide () {
                 console.log('on hide')

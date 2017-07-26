@@ -17,7 +17,7 @@
     </div>
 </template>
 <style lang="less" rel="stylesheet/less">
-    @import '../../theme.less';
+    @import '../../less/theme.less';
 
     .setupthe {
         margin-bottom: 55px;
